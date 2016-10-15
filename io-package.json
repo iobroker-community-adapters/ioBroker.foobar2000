@@ -1,0 +1,61 @@
+{
+    "common": {
+        "name":                     "foobar2000",
+        "version":                  "0.0.1",
+        "title":                    "foobar2000 adapter",
+        "desc":                     {
+ 			             "en": "ioBroker foobar2000 Adapter",
+ 			             "de": "ioBroker Foobar2000 Adapter",
+ 			             "ru": "ioBroker Foobar2000 драйвер"
+	},
+        "license":                  "MIT",
+        "platform":                 "Javascript/Node.js",
+        "mode":                     "daemon",
+        "icon":                     "foobar2000.png",
+        "enabled":                  false,
+	"extIcon":                  "https://raw.githubusercontent.com/ioBroker/ioBroker.foobar2000/master/admin/foobar2000.png",
+	"keywords":                 ["foobar2000", "player"],
+        "readme":                   "https://github.com/ioBroker/ioBroker.foobar2000/blob/master/README.md",
+	"loglevel":                 "info",
+        "type":                     "media"
+        //"restartAdapters":          ["vis"]
+    },
+    "native": {
+        "ip":                       "127.0.0.1",
+        "port":             		8888,
+        "login":                	"",
+        "password":                	""
+    },
+    "objects": [
+
+    ],
+    "instanceObjects": [
+      {
+        "_id": "info.connection",
+        "type": "state",
+        "common": {
+          "role": "indicator.connected",
+          "name": "If connected to foobar2000",
+          "type": "boolean",
+          "read": true,
+          "write": false,
+          "def": false
+        },
+        "native": {
+        }
+      },
+      {
+        "_id": "next",
+        "type": "state",
+        "common": {
+          "name": "next",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      }
+    ]
+}
