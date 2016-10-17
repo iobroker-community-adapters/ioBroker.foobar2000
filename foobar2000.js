@@ -152,7 +152,7 @@ function main() {
     });*/
 }
 function sendCommand(command) {
-    var data = 'cmd='+command+'&param1=';
+    var data = 'cmd=' + command + '&param1=';
     //'/default/?cmd='+command+'&param1='
     //var parts = adapter.config.ip.split(':');
     var options = {
@@ -172,6 +172,7 @@ function sendCommand(command) {
             jsondata += chunk;
         });
         res.on('end', function () {
+            adapter.setState('info.connection', false, true);
             adapter.log.debug('Response "' + jsondata + '"');
 
         });

@@ -6,18 +6,6 @@
 <script type="text/javascript" src="../../socket.io/socket.io.js"></script>
 <script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
 
-
-<!-- optional: use jqGrid
-<link rel="stylesheet" type="text/css" href="../../lib/css/jqGrid/ui.jqgrid-4.5.4.css"/>
-<script type="text/javascript" src="../../lib/js/jqGrid/jquery.jqGrid-4.5.4.min.js"></script>
-<script type="text/javascript" src="../../lib/js/jqGrid/i18n/grid.locale-all.js"></script>
--->
-
-<!-- optional: use multiselect
-<link rel="stylesheet" type="text/css" href="../../lib/css/jquery.multiselect-1.13.css"/>
-<script type="text/javascript" src="../../lib/js/jquery.multiselect-1.13.min.js"></script>
--->
-
 <!-- these two file always have to be included -->
 <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
 <script type="text/javascript" src="../../js/translate.js"></script>
@@ -30,10 +18,10 @@
     // Dictionary (systemDictionary is global variable from adapter-settings.js)
     systemDictionary = {
         "foobar2000 adapter settings": {"de": "Beispiel", "ru": "Настройки драйвера Foobar2000"},
-        "ip":                    {"en": "ip", "de": "ip", "ru": "ip"},
-        "port":                    {"en": "port", "de": "port", "ru": "port"},
-        "login":                    {"en": "login", "de": "login", "ru": "login"},
-        "password":                    {"en": "password", "de": "password", "ru": "password"},
+        "IP:":                    {"en": "ip", "de": "ip", "ru": "ip"},
+        "Port:":                  {"en": "port", "de": "port", "ru": "port"},
+        "Login:":                 {"en": "login", "de": "login", "ru": "login"},
+        "Password:":              {"en": "password", "de": "password", "ru": "password"},
         "on save adapter restarts with new config immediately": {
             "de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
             "ru": "Сразу после сохранения настроек драйвер перезапуститься с новыми значениями"
@@ -76,19 +64,19 @@
 
 <!-- you have to put your config page in a div with id adapter-container -->
 <div id="adapter-container">
-
-    <table><tr>
-        <td><img src="foobar2000.png"/></td>
-        <td><h3 class="translate">foobar2000 adapter settings</h3></td>
-    </tr></table>
-    <p>
-        <span class="translate">ip</span> <input class="value" id="ip"/><br>
-        <span class="translate">port</span> <input class="value" id="port"/><br>
-        <span class="translate">login</span> <input class="value" id="login"/><br>
-        <span class="translate">password</span> <input class="value" id="password"/><br>
-    </p>
-
-    <p class="translate">on save adapter restarts with new config immediately</p>
+    <div id="adapter-container">
+        <table><tr>
+            <td><img src="foobar2000.png"/></td>
+        </tr></table>
+        <h4 class="translate">foobar2000 adapter settings</h4>
+        <table>
+            <tr><td class="translate">IP:</td><td> <input class="value" id="ip"/></td></tr>
+            <tr><td  class="translate">Port:</td><td> <input class="value" id="port"/></td></tr>
+            <tr><td class="translate">Login:</td><td> <input class="value" id="login"/></td></tr>
+            <tr><td  class="translate">Password:</td><td> <input class="value" id="password"/></td></tr>
+        </table>
+        <p class="translate">on save adapter restarts with new config immediately</p>
+    </div>
 
 </div>
 

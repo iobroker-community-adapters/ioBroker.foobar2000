@@ -12,7 +12,7 @@
       "email": "vvvalt@mail.ru"
     }
   ],
-  "homepage": "https://github.com/instalator/ioBroker.foobar2000",
+  "homepage": "https://github.com/instalator/iobroker.foobar2000",
   "license": "MIT",
   "keywords": [
     "ioBroker",
@@ -25,7 +25,7 @@
     "url": "https://github.com/instalator/iobroker.foobar2000"
   },
   "dependencies": {
-    
+
   },
   "devDependencies": {
 

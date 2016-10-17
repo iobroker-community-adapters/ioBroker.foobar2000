@@ -9,13 +9,13 @@
  			             "ru": "ioBroker Foobar2000 драйвер"
 	},
         "license":                  "MIT",
-        "platform":                 "",
+        "platform":                 "Javascript/Node.js",
         "mode":                     "daemon",
         "icon":                     "foobar2000.png",
         "enabled":                  false,
-	"extIcon":                  "https://raw.githubusercontent.com/instalator/ioBroker.foobar2000/master/admin/foobar2000.png",
+	"extIcon":                  "https://raw.githubusercontent.com/instalator/iobroker.foobar2000/master/admin/foobar2000.png",
 	"keywords":                 ["foobar2000", "player"],
-        "readme":                   "https://github.com/instalator/ioBroker.foobar2000/blob/master/README.md",
+        "readme":                   "https://github.com/instalator/iobroker.foobar2000/blob/master/README.md",
 	"loglevel":                 "info",
         "type":                     "media",
         "restartAdapters":          [""]
