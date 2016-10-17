@@ -9,16 +9,16 @@
  			             "ru": "ioBroker Foobar2000 драйвер"
 	},
         "license":                  "MIT",
-        "platform":                 "Javascript/Node.js",
+        "platform":                 "",
         "mode":                     "daemon",
         "icon":                     "foobar2000.png",
         "enabled":                  false,
-	"extIcon":                  "https://raw.githubusercontent.com/ioBroker/ioBroker.foobar2000/master/admin/foobar2000.png",
+	"extIcon":                  "https://raw.githubusercontent.com/instalator/ioBroker.foobar2000/master/admin/foobar2000.png",
 	"keywords":                 ["foobar2000", "player"],
-        "readme":                   "https://github.com/ioBroker/ioBroker.foobar2000/blob/master/README.md",
+        "readme":                   "https://github.com/instalator/ioBroker.foobar2000/blob/master/README.md",
 	"loglevel":                 "info",
-        "type":                     "media"
-        //"restartAdapters":          ["vis"]
+        "type":                     "media",
+        "restartAdapters":          [""]
     },
     "native": {
         "ip":                       "127.0.0.1",
@@ -49,6 +49,175 @@
         "type": "state",
         "common": {
           "name": "next",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "prev",
+        "type": "state",
+        "common": {
+          "name": "prev",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "start",
+        "type": "state",
+        "common": {
+          "name": "start",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "play",
+        "type": "state",
+        "common": {
+          "name": "play",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "pause",
+        "type": "state",
+        "common": {
+          "name": "pause",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "random",
+        "type": "state",
+        "common": {
+          "name": "random",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "volume",
+        "type": "state",
+        "common": {
+          "name": "volume",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "seek",
+        "type": "state",
+        "common": {
+          "name": "seek",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "seek",
+        "type": "state",
+        "common": {
+          "name": "seek",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "repeat",
+        "type": "state",
+        "common": {
+          "name": "repeat",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "shuffle",
+        "type": "state",
+        "common": {
+          "name": "shuffle",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "track",
+        "type": "state",
+        "common": {
+          "name": "track",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "ctime",
+        "type": "state",
+        "common": {
+          "name": "ctime",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "time",
+        "type": "state",
+        "common": {
+          "name": "time",
           "type": "string",
           "def": false,
           "role": "media"

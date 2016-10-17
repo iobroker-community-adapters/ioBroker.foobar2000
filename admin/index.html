@@ -29,9 +29,11 @@
 
     // Dictionary (systemDictionary is global variable from adapter-settings.js)
     systemDictionary = {
-        "foobar2000 adapter settings": {"de": "Beispiel", "ru": "Пример"},
-        "test1":                    {"en": "Test 1", "de": "Test 1", "ru": "Тест 1"},
-        "test2":                    {"en": "Test 2", "de": "Test 2", "ru": "Тест 2"},
+        "foobar2000 adapter settings": {"de": "Beispiel", "ru": "Настройки драйвера Foobar2000"},
+        "ip":                    {"en": "ip", "de": "ip", "ru": "ip"},
+        "port":                    {"en": "port", "de": "port", "ru": "port"},
+        "login":                    {"en": "login", "de": "login", "ru": "login"},
+        "password":                    {"en": "password", "de": "password", "ru": "password"},
         "on save adapter restarts with new config immediately": {
             "de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
             "ru": "Сразу после сохранения настроек драйвер перезапуститься с новыми значениями"
@@ -80,8 +82,10 @@
         <td><h3 class="translate">foobar2000 adapter settings</h3></td>
     </tr></table>
     <p>
-        <span class="translate">test1</span> <input class="value" id="test1"/><br>
-        <span class="translate">test2</span> <input class="value" id="test2"/><br>
+        <span class="translate">ip</span> <input class="value" id="ip"/><br>
+        <span class="translate">port</span> <input class="value" id="port"/><br>
+        <span class="translate">login</span> <input class="value" id="login"/><br>
+        <span class="translate">password</span> <input class="value" id="password"/><br>
     </p>
 
     <p class="translate">on save adapter restarts with new config immediately</p>

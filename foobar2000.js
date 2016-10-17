@@ -32,11 +32,22 @@
 "use strict";
 
 // you have to require the utils module and call adapter function
-var utils =    require(__dirname + '/lib/utils'); // Get common adapter utils
+var utils = require(__dirname + '/lib/utils');
+var http   = require('http');
+var exec = require('child_process').exec;
+var fs = require('fs');
 
-// you have to call the adapter function and pass a options object
-// name has to be set and has to be equal to adapters folder name and main file name excluding extension
-// adapter will be restarted automatically every time as the configuration changed, e.g system.adapter.foobar2000.0
+//var foobarPath = 'C:/Program Files (x86)/foobar2000/';
+var foobarPath = 'C:/Program Files (x86)/foobar2000/';
+/**if (fs.readdirSync(foobarPath).indexOf('foobar2000.exe') === -1) {
+    throw adapter.log.info('Foobar2000.exe was not found');
+}**/
+
+var Commands = {
+    'play': 'Start',
+    'stop': 'Stop'
+};
+
 var adapter = utils.adapter('foobar2000');
 
 // is called when adapter shuts down - callback has to be called under any circumstances!
@@ -62,7 +73,19 @@ adapter.on('stateChange', function (id, state) {
 
     // you can use the ack flag to detect if it is status (true) or command (false)
     if (state && !state.ack) {
-        adapter.log.info('ack is not set!');
+        var param;
+        if (state.val !== 'true' || state.val !== 'false'){
+            param = state.val;
+        } else {
+            param = '';
+        }
+        var ids = id.split(".");
+        if (ids[ids.length - 2].toString().toLowerCase() == 'start'){
+            launchFoobar();
+        } else {
+            var cmd = Commands[ids[ids.length - 2].toString().toLowerCase()];
+            sendCommand(cmd, param);
+        }
     }
 });
 
@@ -86,22 +109,15 @@ adapter.on('ready', function () {
 });
 
 function main() {
-
+    adapter.setState('info.connection', false, true);
+    //foobar.connect(onData, onError);
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
    /* adapter.log.info('config test1: ' + adapter.config.test1);
     adapter.log.info('config test1: ' + adapter.config.test2);*/
 
-
-    /**
-     *
-     *      For every state in the system there has to be also an object of type state
-     *
-     *      Here a simple foobar2000 for a boolean variable named "testVariable"
-     *
-     *      Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-     *
-     */
+    /*launchFoobar();
+    sendCommand('Start');*/
 
     /*adapter.setObject('testVariable', {
         type: 'state',
@@ -116,13 +132,6 @@ function main() {
     // in this foobar2000 all states changes inside the adapters namespace are subscribed
     adapter.subscribeStates('*');
 
-    /**
-     *   setState examples
-     *
-     *   you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-     *
-     */
-
     // the variable testVariable is set to true as command (ack=false)
    /* adapter.setState('testVariable', true);
 
@@ -133,8 +142,6 @@ function main() {
     // same thing, but the state is deleted after 30s (getState will return null afterwards)
     adapter.setState('testVariable', {val: true, ack: true, expire: 30});*/
 
-
-
     // examples for the checkPassword/checkGroup functions
     /*adapter.checkPassword('admin', 'iobroker', function (res) {
         console.log('check user admin pw ioboker: ' + res);
@@ -143,7 +150,56 @@ function main() {
     adapter.checkGroup('admin', 'admin', function (res) {
         console.log('check group user admin group admin: ' + res);
     });*/
-
-
-
 }
+function sendCommand(command) {
+    var data = 'cmd='+command+'&param1=';
+    //'/default/?cmd='+command+'&param1='
+    //var parts = adapter.config.ip.split(':');
+    var options = {
+        host: adapter.config.ip,
+        port: adapter.config.port,
+        path: '/default/?' + data
+    };
+    adapter.log.debug('Send command "' + data + '" to ' /*+ adapter.config.ip*/);
+    // Set up the request
+    http.get(options, function (res) {
+        var jsondata = '';
+        res.setEncoding('utf8');
+        res.on('error', function (e) {
+            adapter.log.warn(e.toString());
+        });
+        res.on('data', function (chunk) {
+            jsondata += chunk;
+        });
+        res.on('end', function () {
+            adapter.log.debug('Response "' + jsondata + '"');
+
+        });
+    }).on('error', function (e) {
+        adapter.log.warn('Got error by post request ' + e.toString());
+    });
+}
+
+function sendShellCommand(command) {
+    exec('foobar2000.exe /' + command, { cwd: foobarPath });
+}
+
+function launchFoobar() {
+    exec('foobar2000.exe', { cwd: foobarPath });
+}
+/**
+ * Stop
+ * PlayOrPause
+ * Start
+ * StartPrevious
+ * StartNext
+ * StartRandom
+ * ?cmd=Volume&param1=100
+ * ?cmd=Seek&param1=97
+ *
+ *
+ *
+ * Browse
+ *
+ *
+ */
