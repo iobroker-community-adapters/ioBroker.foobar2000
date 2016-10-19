@@ -1,10 +1,12 @@
-
 /* jshint -W097 */// jshint strict:false
 /*jslint node: true */
 "use strict";
 
 // you have to require the utils module and call adapter function
+var utils  = require(__dirname + '/lib/utils');
 var http   = require('http');
+var exec   = require('child_process').exec;
+var fs     = require('fs');
 
 var foobarPath = 'C:/Program Files (x86)/foobar2000/';
 /**if (fs.readdirSync(foobarPath).indexOf('foobar2000.exe') === -1) {
@@ -80,22 +82,45 @@ function main() {
     //foobar.connect(onData, onError);
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
+    /* adapter.log.info('config test1: ' + adapter.config.test1);
+     adapter.log.info('config test1: ' + adapter.config.test2);*/
 
     /*launchFoobar();
+     sendCommand('Start');*/
 
     /*adapter.setObject('testVariable', {
+     type: 'state',
+     common: {
+     name: 'testVariable',
+     type: 'boolean',
+     role: 'indicator'
+     },
+     native: {}
+     });*/
 
     // in this foobar2000 all states changes inside the adapters namespace are subscribed
     adapter.subscribeStates('*');
 
     // the variable testVariable is set to true as command (ack=false)
+    /* adapter.setState('testVariable', true);
 
+     // same thing, but the value is flagged "ack"
+     // ack should be always set to true if the value is received from or acknowledged from the target system
+     adapter.setState('testVariable', {val: true, ack: true});
 
+     // same thing, but the state is deleted after 30s (getState will return null afterwards)
+     adapter.setState('testVariable', {val: true, ack: true, expire: 30});*/
 
     // examples for the checkPassword/checkGroup functions
     /*adapter.checkPassword('admin', 'iobroker', function (res) {
+     console.log('check user admin pw ioboker: ' + res);
+     });
 
+     adapter.checkGroup('admin', 'admin', function (res) {
+     console.log('check group user admin group admin: ' + res);
+     });*/
 }
+function sendCommand(command, param) {
     var data = 'cmd=' + command + '&param1=';
     //'/default/?cmd='+command+'&param1='
     //var parts = adapter.config.ip.split(':');
@@ -104,6 +129,7 @@ function main() {
         port: adapter.config.port,
         path: '/default/?' + data
     };
+    adapter.log.debug('Send command "' + data + '" to ' + adapter.config.ip);
     // Set up the request
     http.get(options, function (res) {
         var jsondata = '';
