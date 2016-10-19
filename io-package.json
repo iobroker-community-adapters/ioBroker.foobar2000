@@ -17,8 +17,7 @@
 	"keywords":                 ["foobar2000", "player"],
         "readme":                   "https://github.com/instalator/iobroker.foobar2000/blob/master/README.md",
 	"loglevel":                 "info",
-        "type":                     "media",
-        "restartAdapters":          [""]
+        "type":                     "media"
     },
     "native": {
         "ip":                       "127.0.0.1",
