@@ -20,10 +20,13 @@
         "type":                     "media"
     },
     "native": {
-        "ip":                       "127.0.0.1",
-        "port":             		8888,
-        "login":                	"",
-        "password":                	""
+        "ip":                 "127.0.0.1",
+        "port":               8888,
+        "login":              "",
+        "password":           "",
+        "path":               "",
+        "cmdstart":           "",
+        "cmdexit":            ""
     },
     "objects": [
 
@@ -74,6 +77,19 @@
         "type": "state",
         "common": {
           "name": "start",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "exit",
+        "type": "state",
+        "common": {
+          "name": "exit",
           "type": "string",
           "def": false,
           "role": "media"
@@ -174,10 +190,10 @@
         }
       },
       {
-        "_id": "track",
+        "_id": "codec",
         "type": "state",
         "common": {
-          "name": "track",
+          "name": "codec",
           "type": "string",
           "def": false,
           "role": "media"
@@ -187,10 +203,10 @@
         }
       },
       {
-        "_id": "ctime",
+        "_id": "albumArt",
         "type": "state",
         "common": {
-          "name": "ctime",
+          "name": "albumArt",
           "type": "string",
           "def": false,
           "role": "media"
@@ -200,10 +216,88 @@
         }
       },
       {
-        "_id": "time",
+        "_id": "itemplaying",
         "type": "state",
         "common": {
-          "name": "time",
+          "name": "itemplaying",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "PlaybackOrder",
+        "type": "state",
+        "common": {
+          "name": "PlaybackOrder",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "EmptyPlaylist",
+        "type": "state",
+        "common": {
+          "name": "EmptyPlaylist",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "SwitchPlaylist",
+        "type": "state",
+        "common": {
+          "name": "SwitchPlaylist",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "SAC",
+        "type": "state",
+        "common": {
+          "name": "SAC",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "SAQ",
+        "type": "state",
+        "common": {
+          "name": "SAQ",
+          "type": "string",
+          "def": false,
+          "role": "media"
+        },
+        "native": {
+
+        }
+      },
+      {
+        "_id": "browser",
+        "type": "state",
+        "common": {
+          "name": "browser",
           "type": "string",
           "def": false,
           "role": "media"
