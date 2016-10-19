@@ -149,19 +149,6 @@
         }
       },
       {
-        "_id": "seek",
-        "type": "state",
-        "common": {
-          "name": "seek",
-          "type": "string",
-          "def": false,
-          "role": "media"
-        },
-        "native": {
-
-        }
-      },
-      {
         "_id": "repeat",
         "type": "state",
         "common": {
