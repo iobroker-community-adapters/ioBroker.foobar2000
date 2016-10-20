@@ -2,6 +2,16 @@
     "common": {
         "name":                     "foobar2000",
         "version":                  "0.1.1",
+        "news": {
+            "0.1.1": {
+              "en": "beta version",
+              "ru": "Бета версия"
+            },
+            "0.0.1": {
+              "en": "initial adapter",
+              "de": "Anfangsadapter",
+            }
+    	},
         "title":                    "foobar2000 adapter",
         "desc":                     {
  			             "en": "ioBroker foobar2000 Adapter",
