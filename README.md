@@ -13,6 +13,9 @@
 
 ## Changelog
 
+#### 0.1.1
+* (instalator) fix start, exit for local
+
 #### 0.1.0
 * (instalator) beta (20.10.2016)
 

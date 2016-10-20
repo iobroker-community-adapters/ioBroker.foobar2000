@@ -99,7 +99,11 @@ adapter.on('stateChange', function (id, state) {
 function launch(cmd){
     adapter.log.debug('launch ' + JSON.stringify(cmd));
     if (adapter.config.remote !== 'on'){
-        launchFoobar();
+        if (cmd === 'start'){
+            launchFoobar();
+        } else if (cmd === 'exit'){
+            sendShellCommand('exit');
+        }
     } else if (adapter.config.cmdstart){
         var parts = adapter.config.path.split(':');
         var options = {
