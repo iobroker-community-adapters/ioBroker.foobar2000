@@ -5,7 +5,7 @@
 
 [![NPM](https://nodei.co/npm/iobroker.foobar2000.png?downloads=true)](https://nodei.co/npm/iobroker.foobar2000/)
 
-![admin settings.](admin/admin.jpg)
+![admin settings.](admin/admin.png)
 
 Для управления проигрывателем необходимо установить плагин [foo_httpcontrol] (https://hydrogenaud.io/index.php/topic,62218.0.html).
 
