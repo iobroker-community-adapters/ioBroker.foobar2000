@@ -145,6 +145,7 @@ function sendCommand(command, param) {
     };
     adapter.log.info('Send command "' + JSON.stringify(data) + '" to ' + options.host);
     httpGet('', options, function(data){
+        GetState();
     });
 }
 
@@ -200,7 +201,7 @@ function httpGet(data, option, callback){
         var jsondata = '';
         res.setEncoding('utf8');
         res.on('error', function (e) {
-            adapter.log.warn(e.toString());
+            adapter.log.debug(e.toString());
         });
         res.on('data', function (chunk) {
             jsondata += chunk;
@@ -210,6 +211,7 @@ function httpGet(data, option, callback){
                 adapter.getState(adapter.namespace + '.info.connection', function (err, state){
                     if (!state.val){
                         adapter.setState('info.connection', true, true);
+                        adapter.log.info('Foobar2000 ' +adapter.config.ip +':'+ adapter.config.port + ' connected');
                     }
                 });
                 try {
@@ -239,9 +241,9 @@ function httpGet(data, option, callback){
             }
         });
     }).on('error', function (e) {
-        adapter.log.warn('Got error by post request ' + e.toString());
+        adapter.log.debug('Got error by post request ' + e.toString());
         adapter.setState('info.connection', false, true);
-        adapter.log.info('Reconnect to 10 sec...');
+        adapter.log.debug('Reconnect to 10 sec...');
         timer = setTimeout(function (){
             GetState();
         }, 10000);
