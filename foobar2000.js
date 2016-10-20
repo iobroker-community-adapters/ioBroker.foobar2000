@@ -10,11 +10,9 @@ var fs     = require('fs');
 var adapter = utils.adapter('foobar2000');
 var foobarPath = null;
 var timer;
+var delay = 10000;
 var objState ={};
 
-if (adapter.config.path){
-    foobarPath = adapter.config.path;
-}
 /*if (fs.readdirSync(foobarPath).indexOf('foobar2000.exe') === -1) {
     throw adapter.log.error('Foobar2000.exe was not found');
 }*/
@@ -27,7 +25,11 @@ var Commands = {
     'prev': 'StartPrevious',
     'random': 'StartRandom',
     'seek': 'Seek',
-    'volume': 'Volume'
+    'volume': 'Volume',
+    'SAC': 'SAC',
+    'SAQ': 'SAQ',
+    'EmptyPlaylist': 'EmptyPlaylist',
+    'SwitchPlaylist': 'SwitchPlaylist'
 };
 
 /**
@@ -53,19 +55,20 @@ var Commands = {
  * http://127.0.0.1:8888/foobar2000controller/?param3=version.json
  * http://127.0.0.1:8888/foobar2000controller/?param3=playlist_options.json
  * http://127.0.0.1:8888/foobar2000controller/?param3=library.json
+ * http://192.168.1.10:8585/?cmd=foobar
  */
 
 function GetPlaylist(){
-    httpGet('&param3=playlist.json', function(data){
+    httpGet('&param3=playlist.json', null, function(data){
         if (data.playlist){
-            adapter.setState('playlist', jsondata.playlist.js, true);
-            adapter.setState('playlists', jsondata.playlists.js, true);
+            adapter.setState('playlist', data.playlist.js, true);
+            adapter.setState('playlists', data.playlists.js, true);
         }
     });
 }
 function GetState(){
     clearTimeout(timer);
-    httpGet('&param3=info.json', function(data){
+    httpGet('&param3=info.json', null, function(data){
             var key;
             for (key in data) {
                 if (objState[key] !== data[key]){
@@ -77,7 +80,7 @@ function GetState(){
             adapter.log.debug('Response info "' + JSON.stringify(objState) + '"');
             timer = setTimeout(function (){
                 GetState();
-            }, 2000);
+            }, delay);
     });
 }
 function _SetState(key){
@@ -85,24 +88,6 @@ function _SetState(key){
     adapter.setState(key, objState[key], true);
     if (key ==='isPlaying' || key ==='isPaused'){
         IsPlaying(objState.isPlaying, objState.isPaused);
-    }
-}
-
-function IsPlaying(play ,pause){
-    if (play === '1'){
-        adapter.setState('play', true, true);
-        adapter.setState('pause', false, true);
-        adapter.setState('stop', false, true);
-    } else {
-        if (pause === '1'){
-            adapter.setState('play', false, true);
-            adapter.setState('stop', false, true);
-            adapter.setState('pause', true, true);
-        } else {
-            adapter.setState('stop', true, true);
-            adapter.setState('pause', false, true);
-            adapter.setState('play', false, true);
-        }
     }
 }
 
@@ -129,29 +114,19 @@ adapter.on('stateChange', function (id, state) {
 
     if (state && !state.ack) {
         var param;
-        if (state.val !== 'true' || state.val !== 'false'){
+        if (state.val !== 'true' && state.val !== 'false'){
             param = state.val;
         } else {
             param = '';
         }
         var ids = id.split(".");
         adapter.log.info('id.split ' + JSON.stringify(ids));
-        if (ids[ids.length - 1].toString().toLowerCase() == 'start'){
-            if (foobarPath){
-                launchFoobar();
-            } else if (adapter.config.cmdstart){
-                    var options = {
-                        host: adapter.config.cmdstart
-                    };
-                httpGet(adapter.config.cmdstart, function(data){
-                    adapter.log.info('start foobar2000');
-                });
-            } else {
-                adapter.log.warn('foobar2000 can not be started');
-            }
-
+        var idst = ids[ids.length - 1].toString().toLowerCase();
+        adapter.log.info('stateChange ids ' + idst);
+        if (idst === 'start' || idst === 'exit'){
+            launch(idst);
         } else {
-            var cmd = Commands[ids[ids.length - 1].toString().toLowerCase()];
+            var cmd = Commands[idst];
             sendCommand(cmd, param);
         }
     }
@@ -163,15 +138,37 @@ adapter.on('message', function (obj) {
         if (obj.command == 'send') {
             // e.g. send email or pushover or whatever
             console.log('send command');
-
             // Send response in callback if required
             if (obj.callback) adapter.sendTo(obj.from, obj.command, 'Message received', obj.callback);
         }
     }
 });
 
-// is called when databases are connected and adapter received configuration.
-// start here!
+function launch(cmd){
+    adapter.log.info('launch ' + JSON.stringify(cmd));
+    /*if (foobarPath){ //TODO переписать запуск. Локально либо удаленно
+        launchFoobar();
+    }*/ /*else */
+    if (adapter.config.cmdstart){
+        var parts = adapter.config.path.split(':');
+        var options = {
+            host: parts[0],
+            port: parts[1],
+            path: ''
+        };
+        if (cmd === 'start'){
+            options.path = '/?cmd=' + adapter.config.cmdstart;
+        } else {
+            options.path = '/?cmd=' + adapter.config.cmdexit;
+        }
+        adapter.log.info('launch ' + JSON.stringify(options));
+        httpGet('', options, function(data){
+            adapter.log.info('Start foobar2000');
+        });
+    } else {
+        adapter.log.warn('foobar2000 can not be started');
+    }
+}
 adapter.on('ready', function () {
     main();
 });
@@ -179,75 +176,21 @@ adapter.on('ready', function () {
 function main() {
     adapter.setState('info.connection', false, true);
     GetState();
-    //foobar.connect(onData, onError);
-    // The adapters config (in the instance object everything under the attribute "native") is accessible via
-    // adapter.config:
-    /* adapter.log.info('config test1: ' + adapter.config.test1);
-     adapter.log.info('config test1: ' + adapter.config.test2);*/
-
-    /*launchFoobar();
-     sendCommand('Start');*/
-
-    /*adapter.setObject('testVariable', {
-     type: 'state',
-     common: {
-     name: 'testVariable',
-     type: 'boolean',
-     role: 'indicator'
-     },
-     native: {}
-     });*/
-
-    // in this foobar2000 all states changes inside the adapters namespace are subscribed
+    if (adapter.config.path){
+        foobarPath = adapter.config.path;
+    }
     adapter.subscribeStates('*');
-
-    // the variable testVariable is set to true as command (ack=false)
-    /* adapter.setState('testVariable', true);
-
-     // same thing, but the value is flagged "ack"
-     // ack should be always set to true if the value is received from or acknowledged from the target system
-     adapter.setState('testVariable', {val: true, ack: true});
-
-     // same thing, but the state is deleted after 30s (getState will return null afterwards)
-     adapter.setState('testVariable', {val: true, ack: true, expire: 30});*/
-
-    // examples for the checkPassword/checkGroup functions
-    /*adapter.checkPassword('admin', 'iobroker', function (res) {
-     console.log('check user admin pw ioboker: ' + res);
-     });
-
-     adapter.checkGroup('admin', 'admin', function (res) {
-     console.log('check group user admin group admin: ' + res);
-     });*/
 }
 function sendCommand(command, param) {
     var data = 'cmd=' + command + '&param1=' + param;
-    //'/default/?cmd='+command+'&param1='
-    //var parts = adapter.config.ip.split(':');
     var options = {
         host: adapter.config.ip,
         port: adapter.config.port,
         path: '/default/?' + data
     };
-    adapter.log.info('Send command "' + JSON.stringify(data) + '" to ' + adapter.config.ip);
-    // Set up the request
-    http.get(options, function (res) {
-        var jsondata = '';
-        res.setEncoding('utf8');
-        res.on('error', function (e) {
-            adapter.log.warn(e.toString());
-        });
-        res.on('data', function (chunk) {
-            jsondata += chunk;
-        });
-        res.on('end', function () {
-            adapter.setState('info.connection', true, true);
-            adapter.log.debug('Response "' + jsondata + '"');
-
-        });
-    }).on('error', function (e) {
-        adapter.log.warn('Got error by post request ' + e.toString());
-        adapter.setState('info.connection', false, true);
+    adapter.log.info('Send command "' + JSON.stringify(data) + '" to ' + options.host);
+    httpGet('', options, function(data){
+        adapter.setState('info.connection', true, true);
     });
 }
 
@@ -258,11 +201,15 @@ function sendShellCommand(command) {
 function launchFoobar() {
     exec('foobar2000.exe', { cwd: foobarPath });
 }
-function httpGet(data, options, callback){
-    if (options){
+
+function httpGet(data, option, callback){
+    var options;
+    if (option){
         options = {
-            host: options.host
-        }
+            host: option.host,
+            port: option.port,
+            path: option.path
+        };
     } else {
         options = {
             host: adapter.config.ip,
@@ -270,8 +217,7 @@ function httpGet(data, options, callback){
             path: '/foobar2000controller/?' + data
         };
     }
-    adapter.log.info('foobar2000 httpGet("' + data + '")');
-    // Set up the request
+    adapter.log.info('foobar2000 httpGet("' + data + ' - ' +JSON.stringify(option)+'")');
     http.get(options, function (res) {
         var jsondata = '';
         res.setEncoding('utf8');
@@ -282,11 +228,43 @@ function httpGet(data, options, callback){
             jsondata += chunk;
         });
         res.on('end', function () {
-            jsondata = JSON.parse(jsondata);
-            callback (jsondata);
+            try {
+                jsondata = JSON.parse(jsondata);
+                if (!jsondata) {
+                    throw new SyntaxError("JSON data error");
+                }
+                else {
+                    delay = 2000;
+                    callback (jsondata);
+                }
+            } catch (err) {
+                adapter.log.debug('JSON.Parse data error ' + err.toString());
+                jsondata = null;
+                delay = 2000;
+                GetState();
+            }
         });
     }).on('error', function (e) {
         adapter.log.warn('Got error by post request ' + e.toString());
         adapter.setState('info.connection', false, true);
+        delay = 10000;
+        adapter.log.info('Reconnect to ' + delay/1000 + ' sec.');
     });
+}
+function IsPlaying(play ,pause){
+    if (play === '1'){
+        adapter.setState('play', true, true);
+        adapter.setState('pause', false, true);
+        adapter.setState('stop', false, true);
+    } else {
+        if (pause === '1'){
+            adapter.setState('play', false, true);
+            adapter.setState('stop', false, true);
+            adapter.setState('pause', true, true);
+        } else {
+            adapter.setState('stop', true, true);
+            adapter.setState('pause', false, true);
+            adapter.setState('play', false, true);
+        }
+    }
 }

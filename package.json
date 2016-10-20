@@ -1,7 +1,7 @@
 {
   "name": "iobroker.foobar2000",
-  "version": "0.0.1",
-  "description": "ioBroker foobar2000 Adapter",
+  "version": "0.1.0",
+  "description": "ioBroker Foobar2000 player adapter",
   "author": {
     "name": "instalator",
     "email": "vvvalt@mail.ru"

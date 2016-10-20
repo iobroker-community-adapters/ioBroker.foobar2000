@@ -1,7 +1,7 @@
 {
     "common": {
         "name":                     "foobar2000",
-        "version":                  "0.0.1",
+        "version":                  "0.1.0",
         "title":                    "foobar2000 adapter",
         "desc":                     {
  			             "en": "ioBroker foobar2000 Adapter",
@@ -24,7 +24,7 @@
         "port":               8888,
         "login":              "",
         "password":           "",
-        "path":               "",
+        "path":               "C:/Program Files (x86)/foobar2000/",
         "cmdstart":           "",
         "cmdexit":            ""
     },
