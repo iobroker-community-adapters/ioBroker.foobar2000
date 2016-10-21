@@ -5,11 +5,13 @@
         "news": {
             "0.1.1": {
               "en": "beta version",
+              "de": "Beta version",
               "ru": "Бета версия"
             },
             "0.0.1": {
               "en": "initial adapter",
               "de": "Anfangsadapter",
+              "ru": "Первоначальная версия адаптера"
             }
     	},
         "title":                    "foobar2000 adapter",
