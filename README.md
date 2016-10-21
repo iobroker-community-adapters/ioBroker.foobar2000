@@ -13,6 +13,11 @@
 
 ## Changelog
 
+#### 0.1.2
+* (instalator) del widgets folders
+* (instalator) change log level
+* (instalator) add news object
+
 #### 0.1.1
 * (instalator) fix start, exit for local
 
