@@ -67,10 +67,12 @@
         "_id": "next",
         "type": "state",
         "common": {
-          "name": "next",
-          "type": "string",
-          "def": false,
-          "role": "media"
+          "role": "button.next",
+          "name": "Controlling playback next",
+          "type": "boolean",
+          "read": false,
+          "write": true,
+          "def": false
         },
         "native": {
 
@@ -80,10 +82,12 @@
         "_id": "prev",
         "type": "state",
         "common": {
-          "name": "prev",
-          "type": "string",
-          "def": false,
-          "role": "media"
+          "role": "button.prev",
+          "name": "Controlling playback previous",
+          "type": "boolean",
+          "read": false,
+          "write": true,
+          "def": false
         },
         "native": {
 
@@ -119,10 +123,12 @@
         "_id": "play",
         "type": "state",
         "common": {
-          "name": "play",
-          "type": "string",
-          "def": false,
-          "role": "media"
+          "role": "button.play",
+          "name": "Controlling playback play",
+          "type": "boolean",
+          "read": false,
+          "write": true,
+          "def": false
         },
         "native": {
 
@@ -132,10 +138,12 @@
         "_id": "pause",
         "type": "state",
         "common": {
-          "name": "pause",
-          "type": "string",
-          "def": false,
-          "role": "media"
+          "role": "button.pause",
+          "name": "Controlling playback pause",
+          "type": "boolean",
+          "read": false,
+          "write": true,
+          "def": false
         },
         "native": {
 
@@ -159,9 +167,12 @@
         "type": "state",
         "common": {
           "name": "volume",
-          "type": "string",
-          "def": false,
-          "role": "media"
+          "type": "number",
+          "role": "level.volume",
+          "read": true,
+          "write": false,
+          "min": 0,
+          "max": 100
         },
         "native": {
 
@@ -171,10 +182,14 @@
         "_id": "seek",
         "type": "state",
         "common": {
-          "name": "seek",
-          "type": "string",
-          "def": false,
-          "role": "media"
+          "role": "media.seek",
+          "name": "Controlling playback seek",
+          "type": "number",
+	  "unit": "%",
+          "min": 0,
+          "max": 100,
+          "read": true,
+          "write": true
         },
         "native": {
 
@@ -185,9 +200,11 @@
         "type": "state",
         "common": {
           "name": "repeat",
-          "type": "string",
-          "def": false,
-          "role": "media"
+          "type": "boolean",
+          "role": "media.mode.repeat",
+	  "read": true,
+          "write": true,
+          "def": false
         },
         "native": {
 
@@ -198,9 +215,11 @@
         "type": "state",
         "common": {
           "name": "shuffle",
-          "type": "string",
-          "def": false,
-          "role": "media"
+          "type": "boolean",
+          "role": "media.mode.shuffle",
+	  "read": true,
+          "write": true,
+          "def": false
         },
         "native": {
 
@@ -225,8 +244,8 @@
         "common": {
           "name": "albumArt",
           "type": "string",
-          "def": false,
-          "role": "media"
+          "role": "media.cover",
+	  "def": ""
         },
         "native": {
 
