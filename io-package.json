@@ -63,6 +63,21 @@
         "native": {
         }
       },
+	    {
+        "_id": "stop",
+        "type": "state",
+        "common": {
+          "role": "button.stop",
+          "name": "Controlling playback stop",
+          "type": "boolean",
+          "read": false,
+          "write": true,
+          "def": false
+        },
+        "native": {
+
+        }
+      },
       {
         "_id": "next",
         "type": "state",
