@@ -64,6 +64,22 @@
         }
       },
 	    {
+        "_id": "state",
+        "type": "state",
+        "common": {
+          "name": "Play, stop, or pause, next, previous, mute, unmute",
+          "type": "string",
+          "role": "media.state",
+		  "values": "stop,play,pause,next,previous,mute,unmute",
+		  "read": true,
+          "write": false,
+		  "def": "stop"
+        },
+        "native": {
+
+        }
+      },
+	    {
         "_id": "stop",
         "type": "state",
         "common": {
