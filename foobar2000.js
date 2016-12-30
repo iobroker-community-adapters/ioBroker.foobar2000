@@ -269,18 +269,12 @@ function _SetState(key){
 }
 function IsPlaying(play ,pause){
     if (play === '1'){
-        adapter.setState('play', true, true);
-        adapter.setState('pause', false, true);
-        adapter.setState('stop', false, true);
+        adapter.setState('state', 'play', true);
     } else {
         if (pause === '1'){
-            adapter.setState('play', false, true);
-            adapter.setState('stop', false, true);
-            adapter.setState('pause', true, true);
+            adapter.setState('state', 'pause', true);
         } else {
-            adapter.setState('stop', true, true);
-            adapter.setState('pause', false, true);
-            adapter.setState('play', false, true);
+            adapter.setState('state', 'stop', true);
         }
     }
 }
