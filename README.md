@@ -14,6 +14,9 @@
 
 ## Changelog
 
+#### 0.2.0
+* (instalator) Change for widgets vis-players
+
 #### 0.1.2
 * (instalator) del widgets folders
 * (instalator) change log level
