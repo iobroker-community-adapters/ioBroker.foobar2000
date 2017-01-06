@@ -10,6 +10,11 @@ var adapter = utils.adapter('foobar2000');
 var foobarPath = null;
 var timer;
 var objState ={};
+var oldstates = {};
+var playlist = [];
+var mutevol = 100;
+var curtrack;
+objState.playlist = [];
 
 /*if (fs.readdirSync(foobarPath).indexOf('foobar2000.exe') === -1) {
     throw adapter.log.error('Foobar2000.exe was not found');
@@ -26,13 +31,22 @@ var Commands = {
     'volume': 'Volume',
     'sac': 'SAC',
     'saq': 'SAQ',
-    'emptyplaylist': 'EmptyPlaylist',
     'switchplaylist': 'SwitchPlaylist',
     'search': 'SearchMediaLibrary',
-    'browser': 'Browse'
+    'browser': 'Browse',
+    'playid': 'Start',
+    'clear': 'EmptyPlaylist'
 };
 
+
+
+/*
+TODO add
+TODO albumArt заменить на урл
+ */
 /**
+ *
+ * /foobar2000controller/albumart_10335  - get album
  * cmd=PlaybackOrder&param1=0 //default
  * cmd=PlaybackOrder&param1=3 //random
  * cmd=PlaybackOrder&param1=1 //repeat playlist
@@ -63,24 +77,58 @@ adapter.on('stateChange', function (id, state) {
     adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
     if (state && !state.ack) {
         var param;
-        if (state.val !== 'true' && state.val !== 'false'){
-            param = state.val;
-        } else {
-            param = '';
-        }
         var ids = id.split(".");
         var idst = ids[ids.length - 1].toString().toLowerCase();
+        if (idst === 'mute'){
+            if (state.val){
+                idst = 'volume';
+                mutevol = objState.volume || 100;
+                objState.mute = true;
+                param =  '0';
+            } else {
+                idst = 'volume';
+                param =  mutevol;
+            }
+        } else {
+            if (state.val !== 'true' && state.val !== 'false'){
+                param = state.val;
+            } else {
+                param = '';
+            }
+        }
         if (idst === 'start' || idst === 'exit'){
             launch(idst);
         } else {
             if (idst === 'search'){
                 param = encodeURIComponent(param);
             }
+            if (idst === 'clear'){
+                GetPlaylist();
+            }
             if (idst === 'browser'){
-                browser(Commands[idst], encodeURIComponent(param));
+                if(param === '/'){
+                    param = ' ';
+                }
+                browser(Commands[idst], param);
+            } else if (idst === 'add') {
+                if (idst === 'add'){
+                    param = encodeURIComponent(param);
+                    var options = {
+                        host: adapter.config.ip,
+                        port: adapter.config.port,
+                        path: '/foobar2000controller/?cmd=Browse&param1=' + param + '&param2=EnqueueDirSubdirs&param3=browser.json'
+                    };
+                    httpGet('', options, function(data){
+                        setTimeout(function (){
+                            GetPlaylist();
+                        }, 1000);
+                    });
+                }
             } else {
                 var cmd = Commands[idst];
-                sendCommand(cmd, param);
+                if (cmd){
+                    sendCommand(cmd, param);
+                }
             }
         }
     }
@@ -131,11 +179,13 @@ adapter.on('ready', function () {
 function main() {
     adapter.setState('info.connection', false, true);
     GetState();
+    GetPlaylist();
     if (adapter.config.path){
         foobarPath = adapter.config.path;
     }
     adapter.subscribeStates('*');
 }
+
 function sendCommand(command, param) {
     var data = 'cmd=' + command + '&param1=' + param;
     var options = {
@@ -161,20 +211,74 @@ function GetState(e){
     clearTimeout(timer);
     httpGet('&param3=info.json', null, function(data){
         if (data){
-            var key;
-            for (key in data) {
-                if (objState[key] !== data[key]){
-                    objState[key] = data[key];
-                    _SetState(key);
-                }
+            for (var key in data) {
+                objState[key] = data[key];
             }
+            _SetState();
             //adapter.setState('info.connection', true, true);
-            adapter.log.debug('Response info "' + JSON.stringify(objState) + '"');
+            //adapter.log.debug('Response info "' + JSON.stringify(objState) + '"'); //TODO раскоментить
             timer = setTimeout(function (){
                 GetState();
             }, 2000);
         }
     });
+}
+
+function _SetState(){
+    for (var key in objState) {
+        if (!oldstates[key]){
+            oldstates[key] = '';
+        }
+        if (objState[key] !== oldstates[key]){
+            oldstates[key] = objState[key];
+            _shift(key, function (){
+                adapter.setState(key, objState[key], true);
+            });
+        }
+    }
+}
+
+function _shift(key, callback){
+
+    curtrack = objState.itemplaying;
+    if (objState.playlist && curtrack){
+        objState.artist = objState.playlist[curtrack].artist;
+        objState.album = objState.playlist[curtrack].album;
+        objState.title = objState.playlist[curtrack].track;
+    }
+    if (key ==='codec'){
+        var arr = objState.codec.split('|');
+        objState.bitrate = parseInt(arr[1], 10);
+    }
+    if (key ==='elapsedTime'){
+        objState.current_elapsed = SecToText(objState.elapsedTime);
+    }
+    if (key ==='trackLength' || key ==='page'){
+        objState.current_duration = SecToText(objState.trackLength);
+        GetPlaylist();
+    }
+    if (key ==='isPlaying' || key ==='isPaused'){
+        IsPlaying(objState.isPlaying, objState.isPaused);
+    }
+    callback();
+}
+
+function SecToText(sec){
+    var res;
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    var h = Math.floor(m / 60);
+    m = m % 60;
+    if (h > 0){
+        res = pad2(h) + ":" + pad2(m) + ":" + pad2(s);
+    } else {
+        res = pad2(m) + ":" + pad2(s);
+    }
+    return res;
+}
+function pad2(num) {
+    var s = num.toString();
+    return (s.length < 2)? "0" + s : s;
 }
 
 function httpGet(data, option, callback){
@@ -197,6 +301,8 @@ function httpGet(data, option, callback){
         options.headers = {'Authorization': 'Basic ' + new Buffer(adapter.config.login+':'+adapter.config.password).toString('base64')};
     }
     adapter.log.debug('foobar2000 httpGet("' + data + ' - ' +JSON.stringify(options)+'")');
+    adapter.log.debug('httpGet options - ' + JSON.stringify(options));
+
     http.get(options, function (res) {
         var jsondata = '';
         res.setEncoding('utf8');
@@ -217,7 +323,7 @@ function httpGet(data, option, callback){
                 try {
                     jsondata = JSON.parse(jsondata);
                     if (!jsondata){
-                        throw new SyntaxError("JSON data error");
+                        adapter.log.error('JSON data error');
                     }
                     else {
                         callback(jsondata);
@@ -237,7 +343,7 @@ function httpGet(data, option, callback){
                 }
                 adapter.setState('info.connection', false, true);
                 jsondata = null;
-                res.destroy();
+                //res.destroy();
             }
         });
     }).on('error', function (e) {
@@ -249,38 +355,83 @@ function httpGet(data, option, callback){
         }, 10000);
     });
 }
+
 function GetPlaylist(){
     httpGet('&param3=playlist.json', null, function(data){
         if (data.playlist){
-            //adapter.log.error('GetPlaylist "' + JSON.stringify(data.playlist) + '"');
-            adapter.setState('playlist', JSON.stringify(data.playlist.js), true);
-            adapter.setState('playlists', JSON.stringify(data.playlists.js), true);
+            objState.playlist = convPlaylist(data.playlist.js);
+            objState.playlists = convPlaylist(data.playlists.js);
+            adapter.setState('playlist', JSON.stringify(objState.playlist), true);
+            adapter.setState('playlists', JSON.stringify(objState.playlists), true);
         }
     });
 }
-function _SetState(key){
-    if (key ==='trackLength' || key ==='page'){
-        GetPlaylist();
+
+function convPlaylist(arr){ //TODO Bring all playlists players to the same species
+    for (var i = 0; i < arr.length; i++) {
+        arr[i].file = arr[i].track;
     }
-    adapter.setState(key, objState[key], true);
-    if (key ==='isPlaying' || key ==='isPaused'){
-        IsPlaying(objState.isPlaying, objState.isPaused);
-    }
+    return arr;
 }
+
 function IsPlaying(play ,pause){
     if (play === '1'){
-        adapter.setState('state', 'play', true);
+        objState.state = 'play';
     } else {
         if (pause === '1'){
-            adapter.setState('state', 'pause', true);
+            objState.state = 'pause';
         } else {
-            adapter.setState('state', 'stop', true);
+            objState.state = 'stop';
         }
     }
 }
 function browser(cmd, param){
-    var data = 'cmd=' + cmd + '&param1=' + param + '&' + 'param3=browser.json';
-    httpGet(data, null, function(data){
-        adapter.setState('browser', JSON.stringify(data), true);
+    param = encodeURIComponent(param + '&param3=browser.json');
+    var data = 'cmd=' + cmd + '&param1=' + param;
+    if (cmd){
+        httpGet(data, null, function (data){
+            if (data){
+                data = data.browser;
+                filemanager('', data);
+            }
+        });
+    }
+}
+function filemanager(val, arr){
+    var browser = {};
+    var files = [];
+    arr.forEach(function(item, i, arr) {
+            var obj = {};
+            var size = parseFloat(arr[i].fs) * 1024;
+            if (!isNaN(size)){
+                obj.size = (parseFloat(arr[i].fs.replace(',' , '.')) * 1024).toFixed(0);
+            } else {
+                obj.size = '';
+            }
+            if (arr[i].ft && ~arr[i].ft.indexOf(':')){
+                var mod = arr[i].ft.split(' '); //"27.05.2004 01:50"  2016-02-27 16:05:46
+                var d = mod[0].split('.').reverse().join('-');
+                arr[i].ft = d + ' ' + mod[1];
+            }
+            if (arr[i].fs){
+                obj.filetype = 'file';
+            } else {
+                obj.filetype = 'directory';
+            }
+            if (arr[i].fs === 'NTFS' || arr[i].fs === 'FAT32'){
+                obj.filetype = 'directory';
+            }
+            obj.file = decodeURIComponent(arr[i].pu);
+            obj.lastmodified = arr[i].ft;
+            obj.label = arr[i].p;
+
+            files.push(obj);
+        if (i === arr.length-1){
+            browser.files = files;
+            adapter.setState('browser', JSON.stringify(browser), true);
+        }
     });
+}
+function isFile(str){
+
 }

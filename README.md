@@ -2,7 +2,7 @@
 # Foobar2000 adapter for iobroker
 [![NPM version](https://img.shields.io/npm/v/iobroker.foobar2000.svg)](https://www.npmjs.com/package/iobroker.foobar2000)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.foobar2000.svg)](https://www.npmjs.com/package/iobroker.foobar2000)
-[![Tests](http://img.shields.io/travis/instalator/ioBroker.foobar2000/master.svg)](https://travis-ci.org/instalator/ioBroker.foobar2000)
+[![Tests](http://img.shields.io/travis/instalator/iobroker.foobar2000/master.svg)](https://travis-ci.org/instalator/iobroker.foobar2000)
 
 [![NPM](https://nodei.co/npm/iobroker.foobar2000.png?downloads=true)](https://nodei.co/npm/iobroker.foobar2000/)
 
@@ -13,6 +13,9 @@
 
 
 ## Changelog
+
+#### 0.2.0
+* (instalator) Change for widgets vis-players
 
 #### 0.1.2
 * (instalator) del widgets folders
