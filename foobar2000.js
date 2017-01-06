@@ -392,7 +392,6 @@ function browser(cmd, param){
         httpGet(data, null, function (data){
             if (data){
                 data = data.browser;
-                adapter.log.error('++===================++ ' + JSON.stringify(data));
                 filemanager('', data);
             }
         });
@@ -414,7 +413,6 @@ function filemanager(val, arr){
                 var d = mod[0].split('.').reverse().join('-');
                 arr[i].ft = d + ' ' + mod[1];
             }
-            adapter.log.error('------------------------ ' + arr[i].fs);
             if (arr[i].fs){
                 obj.filetype = 'file';
             } else {
