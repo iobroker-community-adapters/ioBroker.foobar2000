@@ -701,14 +701,15 @@
         "_id": "browser",
         "type": "state",
         "common": {
-          "name": "browser",
+          "role": "media.browser",
+          "name": "The music database browser",
           "type": "string",
-          "def": false,
-          "role": "media"
+          "read": true,
+          "write": true,
+          "def": ""
         },
         "native": {
 
         }
-      }
     ]
 }
