@@ -31,6 +31,9 @@
  			             "ru": "ioBroker Foobar2000 драйвер"
 	},
         "license":                  "MIT",
+	    "authors": [
+             "instalator"
+        ],
         "platform":                 "Javascript/Node.js",
         "mode":                     "daemon",
         "icon":                     "foobar2000.png",
