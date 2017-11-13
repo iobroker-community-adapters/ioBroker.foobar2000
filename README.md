@@ -14,6 +14,9 @@
 
 ## Changelog
 
+#### 1.0.0
+* (instalator) Up to stable
+
 #### 0.2.0
 * (instalator) Change for widgets vis-players
 
