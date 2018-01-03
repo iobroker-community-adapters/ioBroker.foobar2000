@@ -6,7 +6,7 @@ var utils  = require(__dirname + '/lib/utils');
 var http   = require('http');
 var exec   = require('child_process').exec;
 var fs     = require('fs');
-var adapter = utils.adapter('foobar2000');
+var adapter = utils.Adapter('foobar2000');
 var foobarPath = null;
 var timer;
 var objState ={};
