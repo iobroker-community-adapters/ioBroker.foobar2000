@@ -2,7 +2,7 @@
 /*jslint node: true */
 "use strict";
 
-var utils  = require(__dirname + '/lib/utils');
+var utils = require('@iobroker/adapter-core');
 var http   = require('http');
 var exec   = require('child_process').exec;
 var fs     = require('fs');
