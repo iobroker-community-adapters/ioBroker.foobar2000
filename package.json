@@ -24,7 +24,9 @@
     "type": "git",
     "url": "https://github.com/instalator/iobroker.foobar2000"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@iobroker/adapter-core": "^1.0.3"
+  },
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-replace": "^1.0.1",
