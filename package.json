@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/instalator/iobroker.foobar2000"
+    "url": "https://github.com/instalator/ioBroker.foobar2000.git"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^1.0.3"
