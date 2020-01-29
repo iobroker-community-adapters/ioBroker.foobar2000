@@ -24,7 +24,7 @@
                 "ru": "Первоначальная версия адаптера"
             }
     	},
-        "title":                    "foobar2000 adapter",
+        "title":                    "foobar2000",
         "desc":                     {
  			             "en": "ioBroker foobar2000 Adapter",
  			             "de": "ioBroker Foobar2000 Adapter",
