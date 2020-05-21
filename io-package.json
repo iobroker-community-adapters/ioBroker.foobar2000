@@ -30,9 +30,16 @@
     },
     "title": "Control foobar2000 player",
     "desc": {
-      "en": "ioBroker foobar2000 Adapter",
-      "de": "ioBroker Foobar2000 Adapter",
-      "ru": "ioBroker Foobar2000 драйвер"
+      "en": "Control your foobar2000 player",
+      "de": "Steuern Sie Ihren foobar2000-Player",
+      "ru": "Управляйте своим игроком foobar2000",
+      "pt": "Controle o seu foobar2000 player",
+      "nl": "Bedien uw foobar2000-speler",
+      "fr": "Contrôlez votre lecteur foobar2000",
+      "it": "Controlla il tuo giocatore foobar2000",
+      "es": "Controla tu reproductor foobar2000",
+      "pl": "Kontroluj swój odtwarzacz foobar2000",
+      "zh-cn": "控制您的foobar2000播放器"
     },
     "license": "MIT",
     "authors": [

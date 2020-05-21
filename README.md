@@ -11,9 +11,9 @@
 ![admin settings.](admin/admin.png)
 ## Using
 Описание [тут](http://blog.instalator.ru/archives/541).
-Для управления проигрывателем необходимо установить плагин [foo_httpcontrol] (https://bitbucket.org/oblikoamorale/foo_httpcontrol/downloads/).
+Для управления проигрывателем необходимо установить плагин [foo_httpcontrol](https://bitbucket.org/oblikoamorale/foo_httpcontrol/downloads/).
 
-To control the player, you must install the plugin [foo_httpcontrol] (https://bitbucket.org/oblikoamorale/foo_httpcontrol/downloads/).
+To control the player, you must install the plugin [foo_httpcontrol](https://bitbucket.org/oblikoamorale/foo_httpcontrol/downloads/).
 
 ## Changelog
 
