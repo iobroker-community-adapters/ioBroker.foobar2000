@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     if (process.argv[2] == 'rename') {
 		console.log('Try to rename to "' + newname + '"');
         if (!newname) {
-            console.log('Please write the new synology name, like: "grunt rename --name=mywidgetset" --author="Author Name"');
+            console.log('Please write the new foobar2000 name, like: "grunt rename --name=mywidgetset" --author="Author Name"');
             process.exit();
         }
         if (newname.indexOf(' ') != -1) {
@@ -32,17 +32,17 @@ module.exports = function (grunt) {
             console.log('Name must be lower case.');
             process.exit();
         }
-        if (fs.existsSync(__dirname + '/admin/synology.png')) {
-            fs.renameSync(__dirname + '/admin/synology.png',              __dirname + '/admin/' + newname + '.png');
+        if (fs.existsSync(__dirname + '/admin/foobar2000.png')) {
+            fs.renameSync(__dirname + '/admin/foobar2000.png',              __dirname + '/admin/' + newname + '.png');
         }
-        if (fs.existsSync(__dirname + '/widgets/synology.html')) {
-            fs.renameSync(__dirname + '/widgets/synology.html',           __dirname + '/widgets/' + newname + '.html');
+        if (fs.existsSync(__dirname + '/widgets/foobar2000.html')) {
+            fs.renameSync(__dirname + '/widgets/foobar2000.html',           __dirname + '/widgets/' + newname + '.html');
         }
-        if (fs.existsSync(__dirname + '/widgets/synology/js/synology.js')) {
-            fs.renameSync(__dirname + '/widgets/synology/js/synology.js', __dirname + '/widgets/synology/js/' + newname + '.js');
+        if (fs.existsSync(__dirname + '/widgets/foobar2000/js/foobar2000.js')) {
+            fs.renameSync(__dirname + '/widgets/foobar2000/js/foobar2000.js', __dirname + '/widgets/foobar2000/js/' + newname + '.js');
         }
-        if (fs.existsSync(__dirname + '/widgets/synology')) {
-            fs.renameSync(__dirname + '/widgets/synology',                __dirname + '/widgets/' + newname);
+        if (fs.existsSync(__dirname + '/widgets/foobar2000')) {
+            fs.renameSync(__dirname + '/widgets/foobar2000',                __dirname + '/widgets/' + newname);
         }
     }
 
@@ -100,12 +100,12 @@ module.exports = function (grunt) {
                 options: {
                     patterns: [
                         {
-                            match: /synology/g,
+                            match: /foobar2000/g,
                             replacement: newname
                         },
                         {
-                            match: /Synology/g,
-                            replacement: newname ? (newname[0].toUpperCase() + newname.substring(1)) : 'Synology'
+                            match: /foobar2000/g,
+                            replacement: newname ? (newname[0].toUpperCase() + newname.substring(1)) : 'foobar2000'
                         },
                         {
                             match: /instalator/g,
