@@ -6,13 +6,19 @@
 
 [![NPM](https://nodei.co/npm/iobroker.foobar2000.png?downloads=true)](https://nodei.co/npm/iobroker.foobar2000/)
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PFUALWTR2CTPY)
+
 ![admin settings.](admin/admin.png)
 ## Using
 Описание [тут](http://blog.instalator.ru/archives/541).
-Для управления проигрывателем необходимо установить плагин [foo_httpcontrol] (https://hydrogenaud.io/index.php/topic,62218.0.html).
+Для управления проигрывателем необходимо установить плагин [foo_httpcontrol] (https://bitbucket.org/oblikoamorale/foo_httpcontrol/downloads/).
 
+To control the player, you must install the plugin [foo_httpcontrol] (https://bitbucket.org/oblikoamorale/foo_httpcontrol/downloads/).
 
 ## Changelog
+
+#### 2.0.0
+* (instalator) Completely rewritten
 
 #### 1.0.0
 * (instalator) Up to stable

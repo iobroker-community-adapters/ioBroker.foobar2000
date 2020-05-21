@@ -1,7 +1,9 @@
 *.class
-
-node_modules/
+tasks/
+devfile/
 .idea
+.git
+node_modules/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
