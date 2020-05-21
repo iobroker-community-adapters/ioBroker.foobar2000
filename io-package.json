@@ -3,6 +3,18 @@
     "name": "foobar2000",
     "version": "2.0.0",
     "news": {
+      "2.0.1": {
+        "en": "fixed error",
+        "de": "fixed error",
+        "ru": "fixed error",
+        "pt": "fixed error",
+        "nl": "fixed error",
+        "fr": "fixed error",
+        "it": "fixed error",
+        "es": "fixed error",
+        "pl": "fixed error",
+        "zh-cn": "fixed error"
+      },
       "2.0.0": {
         "en": "Completely rewritten",
         "de": "Completely rewritten",

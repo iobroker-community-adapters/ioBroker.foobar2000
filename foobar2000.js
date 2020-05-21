@@ -218,8 +218,8 @@ function getCurrentTrackInfo(cb){
         if (res){
             states.volume = res.volume;
             states.state = statePlaying(res.isPlaying, res.playingItem);
-            states.album = res.playlist[0].album;
-            states.artist = res.playlist[0].artist;
+            states.album = res.playlist[0].album === '?' ? '': res.playlist[0].album;
+            states.artist = res.playlist[0].artist === '?' ? res.playlist[0].track: res.playlist[0].artist;
             states.title = res.playlist[0].track;
             states.current_duration = res.playlist[0].len;
             states.rating = res.playlist[0].rating !== '?' ? res.playlist[0].rating :'';
@@ -228,19 +228,28 @@ function getCurrentTrackInfo(cb){
             states.itemPlaying = parseInt(res.playingItem, 10) + 1;
             states.playid = parseInt(res.playingItem, 10) + 1;
             states.codec = res.codec.split('|')[0];
-            states.bitrate = parseInt(res.codec.split('|')[1], 10);
-            states.sampleRate = parseInt(res.codec.split('|')[2], 10);
-            states.bits = parseInt(res.codec.split('|')[3], 10);
-            states.channels = res.codec.split('|')[4];
+            states.bitrate = res.codec && parseInt(res.codec.split('|')[1], 10);
+            states.sampleRate = res.codec && parseInt(res.codec.split('|')[2], 10);
+            states.bits = res.codec && parseInt(res.codec.split('|')[3], 10);
+            states.channels = res.codec && res.codec.split('|')[4] || res.codec.split('|')[3];
             states.albumArt = adapter.config.ip + ':' + adapter.config.port + res.albumArt;
             states.volumeDB = parseInt(res.volumeDB, 10);
             states.trackLength = parseInt(res.trackLength, 10);
             states.elapsedTime = parseInt(res.trackPosition, 10);
-            states.seek = parseFloat((res.trackPosition / res.trackLength) * 100).toFixed(4);
+            states.seek = isNaN(parseFloat((res.trackPosition / res.trackLength) * 100).toFixed(4)) ? 0:parseFloat((res.trackPosition / res.trackLength) * 100).toFixed(4);
             states.mute = res.volume === 0;
             cb && cb();
         }
     });
+}
+
+function clearStatePlay(){
+    states.album = '';
+    states.artist = '';
+    states.title = '';
+    states.albumArt = '';
+    states.current_duration = '00:00';
+    states.rating = '';
 }
 
 function getInfo(cb){
@@ -295,6 +304,7 @@ function statePlaying(play, item){
             state = 'pause';
         } else {
             state = 'stop';
+            clearStatePlay();
         }
     }
     return state;
@@ -331,8 +341,7 @@ function main(){
     }
     adapter.subscribeStates('*');
     poll();
-
-    getPlaylist(); // test
+    //getPlaylist(); // test
 }
 
 function setInfoConnection(val){

@@ -13,10 +13,15 @@
 ## Using
 Описание [тут](http://blog.instalator.ru/archives/541).
 Для управления проигрывателем необходимо установить плагин [foo_httpcontrol](https://bitbucket.org/oblikoamorale/foo_httpcontrol/downloads/).
+Для отображения обложки как ссылка на файл, необходимо в файле ```c:\Users\{USER}\AppData\Roaming\foobar2000\foo_httpcontrol_data\foobar2000controller\config``` изменить параметр ```albumart_prefer_embedded=0```
 
 To control the player, you must install the plugin [foo_httpcontrol](https://bitbucket.org/oblikoamorale/foo_httpcontrol/downloads/).
+To display the cover as a link to a file, in the file ```c:\Users\{USER}\AppData\Roaming\foobar2000\foo_httpcontrol_data\foobar2000controller\config``` change the parameter ```albumart_prefer_embedded = 0```
 
 ## Changelog
+
+#### 2.0.1
+* (instalator) fixed error
 
 #### 2.0.0
 * (instalator) Completely rewritten
