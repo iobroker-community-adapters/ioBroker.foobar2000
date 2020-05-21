@@ -2,34 +2,34 @@
 const utils = require('@iobroker/adapter-core');
 let http = require('http');
 let exec = require('child_process').exec;
-let adapter, foobarPath = null, timerPoll, mutevol = 100, curtrack, request, old_states,
+let adapter, foobarPath = null, timerPoll, timeout, muteVol = 100, request, old_states,
     states = {
         playlist: []
     };
 
 
 let Commands = {
-    'play':           'Start',
-    'stop':           'Stop',
-    'next':           'StartNext',
-    'pause':          'PlayOrPause',
-    'prev':           'StartPrevious',
-    'nextrandom':     'StartRandom',
-    'repeat':         'PlaybackOrder',
-    'shuffle':        'PlaybackOrder',
-    'random':         'PlaybackOrder',
-    'seek':           'Seek',
-    'volume':         'Volume',
-    'volumedb':         'VolumeDB',
-    'rating':         'PlayingCommand',
-    'sac':            'SAC',
-    'saq':            'SAQ',
+    'play':            'Start',
+    'stop':            'Stop',
+    'next':            'StartNext',
+    'pause':           'PlayOrPause',
+    'prev':            'StartPrevious',
+    'nextrandom':      'StartRandom',
+    'repeat':          'PlaybackOrder',
+    'shuffle':         'PlaybackOrder',
+    'random':          'PlaybackOrder',
+    'seek':            'Seek',
+    'volume':          'Volume',
+    'volumedb':        'VolumeDB',
+    'rating':          'PlayingCommand',
+    'sac':             'SAC',
+    'saq':             'SAQ',
     'switch_playlist': 'SwitchPlaylist',
-    'search':         'SearchMediaLibrary',
-    'browser':        'Browse',
-    'playid':         'Start',
-    'itemplaying':    'Start',
-    'clear':          'EmptyPlaylist'
+    'search':          'SearchMediaLibrary',
+    'browser':         'Browse',
+    'playid':          'Start',
+    'itemplaying':     'Start',
+    'clear':           'EmptyPlaylist'
 };
 
 function startAdapter(options){
@@ -39,6 +39,7 @@ function startAdapter(options){
         ready:        main,
         unload:       callback => {
             timerPoll && clearInterval(timerPoll);
+            timeout && clearTimeout(timeout);
             try {
                 debug('cleaned everything up...');
                 callback();
@@ -62,23 +63,23 @@ function startAdapter(options){
                     param = state.val;
                 }
                 if (id === 'rating'){
-                    if(state.val > 5) state.val = 5;
-                    if(state.val < 0) state.val = 0;
+                    if (state.val > 5) state.val = 5;
+                    if (state.val < 0) state.val = 0;
                     param = encodeURIComponent('Playback Statistics/Rating/' + state.val);
                 }
                 if (id === 'seek'){
-                    if(state.val > 100) state.val = 100;
-                    if(state.val < 0) state.val = 0;
+                    if (state.val > 100) state.val = 100;
+                    if (state.val < 0) state.val = 0;
                     param = state.val;
                 }
                 if (id === 'volume'){
-                    if(state.val > 100) state.val = 100;
-                    if(state.val < 0) state.val = 0;
+                    if (state.val > 100) state.val = 100;
+                    if (state.val < 0) state.val = 0;
                     param = state.val;
                 }
                 if (id === 'volumedb'){ //volume level, 0...665 (0...-66.5 db), or 1000 to mute
-                    if(state.val > 665) state.val = 665;
-                    if(state.val < 0) state.val = 0;
+                    if (state.val > 665) state.val = 665;
+                    if (state.val < 0) state.val = 0;
                     param = state.val;
                 }
                 if (id === 'playid'){
@@ -108,11 +109,11 @@ function startAdapter(options){
                 if (id === 'mute'){
                     if (state.val){
                         id = 'volume';
-                        mutevol = states.volume || 100;
+                        muteVol = states.volume || 100;
                         param = '0';
                     } else {
                         id = 'volume';
-                        param = mutevol;
+                        param = muteVol;
                     }
                 }
                 if (id === 'search'){
@@ -136,8 +137,9 @@ function startAdapter(options){
                             port: adapter.config.port,
                             path: '/foobar2000controller/?cmd=Browse&param1=' + param + '&param2=EnqueueDirSubdirs' //&param3=browser.json
                         };*/
+                        timeout && clearTimeout(timeout);
                         httpGet('Browse', [param, 'EnqueueDirSubdirs'], (data) => {
-                            setTimeout(() => {
+                            timeout = setTimeout(() => {
                                 getPlaylist();
                             }, 1000);
                         });
@@ -156,7 +158,6 @@ function startAdapter(options){
         }
     }));
 }
-
 
 function httpGet(cmd, param, cb){
     let params = '';
@@ -221,7 +222,7 @@ function getCurrentTrackInfo(cb){
             states.artist = res.playlist[0].artist;
             states.title = res.playlist[0].track;
             states.current_duration = res.playlist[0].len;
-            states.rating = res.playlist[0].rating !== '?' ? res.playlist[0].rating: '';
+            states.rating = res.playlist[0].rating !== '?' ? res.playlist[0].rating :'';
             states.current_elapsed = secToText(res.trackPosition);
             states.playlistId = parseInt(res.currentPlaylist, 10);
             states.itemPlaying = parseInt(res.playingItem, 10) + 1;
@@ -302,7 +303,7 @@ function statePlaying(play, item){
 function setStates(){
     Object.keys(states).forEach((key) => {
         if (states[key] !== old_states[key]){
-            if(key === 'playid'){
+            if (key === 'playid'){
                 getPlaylist();
             }
             old_states[key] = states[key];
@@ -434,7 +435,7 @@ function launchFoobar(){
 
 function browser(cmd, param){
     param = encodeURIComponent(param); //'&param3=browser.json'
-   // let data = 'cmd=' + cmd + '&param1=' + param;
+    // let data = 'cmd=' + cmd + '&param1=' + param;
     if (cmd){
         httpGet(cmd, [param], (data) => {
             if (data){
@@ -479,7 +480,6 @@ function filemanager(val, arr){
         }
     });
 }
-
 
 if (module.parent){
     module.exports = startAdapter;
