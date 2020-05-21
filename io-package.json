@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "foobar2000",
-    "version": "2.0.0",
+    "version": "2.0.2",
     "news": {
-      "2.0.1": {
+      "2.0.2": {
         "en": "fixed error",
         "de": "fixed error",
         "ru": "fixed error",
