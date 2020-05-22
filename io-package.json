@@ -1,19 +1,19 @@
 {
   "common": {
     "name": "foobar2000",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "news": {
-      "2.0.2": {
-        "en": "fixed error",
-        "de": "fixed error",
-        "ru": "fixed error",
-        "pt": "fixed error",
-        "nl": "fixed error",
-        "fr": "fixed error",
-        "it": "fixed error",
-        "es": "fixed error",
-        "pl": "fixed error",
-        "zh-cn": "fixed error"
+      "2.0.3": {
+        "en": "fixed admin error",
+        "de": "fixed admin error",
+        "ru": "fixed admin error",
+        "pt": "fixed admin error",
+        "nl": "fixed admin error",
+        "fr": "fixed admin error",
+        "it": "fixed admin error",
+        "es": "fixed admin error",
+        "pl": "fixed admin error",
+        "zh-cn": "fixed admin error"
       },
       "2.0.0": {
         "en": "Completely rewritten",
@@ -26,18 +26,6 @@
         "es": "Completely rewritten",
         "pl": "Completely rewritten",
         "zh-cn": "Completely rewritten"
-      },
-      "1.0.1": {
-        "en": "fixed error",
-        "de": "fixed error",
-        "ru": "fixed error",
-        "pt": "fixed error",
-        "nl": "fixed error",
-        "fr": "fixed error",
-        "it": "fixed error",
-        "es": "fixed error",
-        "pl": "fixed error",
-        "zh-cn": "fixed error"
       }
     },
     "title": "Control foobar2000 player",
