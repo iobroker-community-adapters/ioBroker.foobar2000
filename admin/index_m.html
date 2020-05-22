@@ -19,17 +19,17 @@
                     $key.prop('checked', settings[id])
                         .on('change', () => {
                             if ($key.prop('checked')){
-                                hideShow(true);
+                                hideShow(true, settings);
                             } else {
-                                hideShow(false);
+                                hideShow(false, settings);
                             }
                             onChange();
                         });
                     if ($key.prop('id') === 'remote'){
                         if ($key.prop('checked')){
-                            hideShow(true);
+                            hideShow(true, settings);
                         } else {
-                            hideShow(false);
+                            hideShow(false, settings);
                         }
                         translateAll();
                     }
@@ -58,13 +58,13 @@
 
         function hideShow(val){
             if (val){
-                $('#path').val('127.0.0.1:8585');
+                //$('#path').val('127.0.0.1:8585');
                 $('#local_hint').hide();
                 $('#remote_hint').show();
                 $('#div-cmdstart').show();
                 $('#div-cmdexit').show();
             } else {
-                $('#path').val('C:/Program Files (x86)/foobar2000/');
+                //$('#path').val('C:/Program Files (x86)/foobar2000/');
                 $('#local_hint').show();
                 $('#remote_hint').hide();
                 $('#div-cmdstart').hide();

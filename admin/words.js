@@ -74,28 +74,28 @@ systemDictionary = {
         "zh-cn": "路径或URL"
     },
     "local_hint":  {
-        "en":    "Local path for folder foobar",
-        "de":    "Lokaler Pfad für Ordner foobar",
-        "ru":    "Локальный путь к папке foobar",
-        "pt":    "Caminho local para a pasta foobar",
-        "nl":    "Lokaal pad voor map foobar",
-        "fr":    "Chemin local pour le dossier foobar",
-        "it":    "Percorso locale per la cartella foobar",
-        "es":    "Ruta local para carpeta foobar",
-        "pl":    "Lokalna ścieżka do foobar folderu",
-        "zh-cn": "文件夹foobar的本地路径"
+        "en":    "Local path for folder foobar (C:/Program Files (x86)/foobar2000/)",
+        "de":    "Lokaler Pfad für Ordner foobar (C:/Program Files (x86)/foobar2000/)",
+        "ru":    "Локальный путь к папке foobar (C:/Program Files (x86)/foobar2000/)",
+        "pt":    "Caminho local para a pasta foobar (C:/Program Files (x86)/foobar2000/)",
+        "nl":    "Lokaal pad voor map foobar (C:/Program Files (x86)/foobar2000/)",
+        "fr":    "Chemin local pour le dossier foobar (C:/Program Files (x86)/foobar2000/)",
+        "it":    "Percorso locale per la cartella foobar (C:/Program Files (x86)/foobar2000/)",
+        "es":    "Ruta local para carpeta foobar (C:/Program Files (x86)/foobar2000/)",
+        "pl":    "Lokalna ścieżka do foobar folderu (C:/Program Files (x86)/foobar2000/)",
+        "zh-cn": "文件夹foobar的本地路径 (C:/Program Files (x86)/foobar2000/)"
     },
     "remote_hint": {
-        "en":    "Remote path to the remote start Foobar (ip:port for GetAdmin)",
-        "de":    "Remote-Pfad zum Remote-Start Foobar (IP: Port für GetAdmin)",
-        "ru":    "Удаленный путь к удаленному запуску Foobar (ip: порт для GetAdmin)",
-        "pt":    "Caminho remoto para o início remoto Foobar (ip: port for GetAdmin)",
-        "nl":    "Extern pad naar de externe start Foobar (ip: poort voor GetAdmin)",
-        "fr":    "Chemin d'accès distant au Foobar de démarrage à distance (ip: port pour GetAdmin)",
-        "it":    "Percorso remoto per l'avvio remoto Foobar (ip: porta per GetAdmin)",
-        "es":    "Ruta remota al Foobar de inicio remoto (ip: puerto para GetAdmin)",
-        "pl":    "Zdalna ścieżka do zdalnego uruchamiania Foobar (ip: port dla GetAdmin)",
-        "zh-cn": "远程启动Foobar的远程路径（适用于GetAdmin的ip：port)"
+        "en":    "Remote path to the remote start Foobar (127.0.0.1:8585 for GetAdmin)",
+        "de":    "Remote-Pfad zum Remote-Start Foobar (127.0.0.1:8585 für GetAdmin)",
+        "ru":    "Удаленный путь к удаленному запуску Foobar (127.0.0.1:8585 для GetAdmin)",
+        "pt":    "Caminho remoto para o início remoto Foobar (127.0.0.1:8585 for GetAdmin)",
+        "nl":    "Extern pad naar de externe start Foobar (127.0.0.1:8585 voor GetAdmin)",
+        "fr":    "Chemin d'accès distant au Foobar de démarrage à distance (127.0.0.1:8585 pour GetAdmin)",
+        "it":    "Percorso remoto per l'avvio remoto Foobar (127.0.0.1:8585 per GetAdmin)",
+        "es":    "Ruta remota al Foobar de inicio remoto (127.0.0.1:8585 para GetAdmin)",
+        "pl":    "Zdalna ścieżka do zdalnego uruchamiania Foobar (127.0.0.1:8585 dla GetAdmin)",
+        "zh-cn": "远程启动Foobar的远程路径（适用于GetAdmin的127.0.0.1:8585)"
     },
     "remote":      {
         "en":    "Remote start",
