@@ -1,9 +1,20 @@
 {
   "common": {
     "name": "foobar2000",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "news": {
-      "2.0.3": {
+      "2.0.4": {
+        "en": "fixed error",
+        "de": "fixed error",
+        "ru": "fixed error",
+        "pt": "fixed error",
+        "nl": "fixed error",
+        "fr": "fixed error",
+        "it": "fixed error",
+        "es": "fixed error",
+        "pl": "fixed error",
+        "zh-cn": "fixed error"
+      },"2.0.3": {
         "en": "fixed admin error",
         "de": "fixed admin error",
         "ru": "fixed admin error",

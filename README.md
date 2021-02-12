@@ -2,7 +2,7 @@
 # Foobar2000 adapter for iobroker
 ![Number of Installations](http://iobroker.live/badges/foobar2000-installed.svg) ![Number of Installations](http://iobroker.live/badges/foobar2000-stable.svg) [![NPM version](https://img.shields.io/npm/v/iobroker.foobar2000.svg)](https://www.npmjs.com/package/iobroker.foobar2000)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.foobar2000.svg)](https://www.npmjs.com/package/iobroker.foobar2000)
-[![Tests](http://img.shields.io/travis/instalator/ioBroker.foobar2000/master.svg)](https://travis-ci.org/instalator/ioBroker.foobar2000)
+[![Tests](https://github.com/instalator/iobroker.foobar2000/workflows/Test%20and%20Release/badge.svg)](https://github.com/instalator/ioBroker.foobar2000/actions/)   
 
 [![NPM](https://nodei.co/npm/iobroker.foobar2000.png?downloads=true)](https://nodei.co/npm/iobroker.foobar2000/)
 
@@ -19,6 +19,9 @@ To control the player, you must install the plugin [foo_httpcontrol](https://bit
 To display the cover as a link to a file, in the file ```c:\Users\{USER}\AppData\Roaming\foobar2000\foo_httpcontrol_data\foobar2000controller\config``` change the parameter ```albumart_prefer_embedded = 0```
 
 ## Changelog
+
+#### 2.0.4
+* (instalator) fixed error
 
 #### 2.0.3
 * (instalator) fixed admin error

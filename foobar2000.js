@@ -7,7 +7,6 @@ let adapter, foobarPath = null, timerPoll, timeout, muteVol = 100, request, old_
         playlist: []
     };
 
-
 let Commands = {
     'play':            'Start',
     'stop':            'Stop',
@@ -218,8 +217,8 @@ function getCurrentTrackInfo(cb){
         if (res){
             states.volume = res.volume;
             states.state = statePlaying(res.isPlaying, res.playingItem);
-            states.album = res.playlist[0].album === '?' ? '': res.playlist[0].album;
-            states.artist = res.playlist[0].artist === '?' ? res.playlist[0].track: res.playlist[0].artist;
+            states.album = res.playlist[0].album === '?' ? '' :res.playlist[0].album;
+            states.artist = res.playlist[0].artist === '?' ? res.playlist[0].track :res.playlist[0].artist;
             states.title = res.playlist[0].track;
             states.current_duration = res.playlist[0].len;
             states.rating = res.playlist[0].rating !== '?' ? res.playlist[0].rating :'';
@@ -236,7 +235,7 @@ function getCurrentTrackInfo(cb){
             states.volumeDB = parseInt(res.volumeDB, 10);
             states.trackLength = parseInt(res.trackLength, 10);
             states.elapsedTime = parseInt(res.trackPosition, 10);
-            states.seek = isNaN(parseFloat((res.trackPosition / res.trackLength) * 100).toFixed(4)) ? 0:parseFloat((res.trackPosition / res.trackLength) * 100).toFixed(4);
+            states.seek = isNaN(parseFloat((res.trackPosition / res.trackLength) * 100).toFixed(4)) ? 0 :parseFloat((res.trackPosition / res.trackLength) * 100).toFixed(4);
             states.mute = res.volume === 0;
             cb && cb();
         }
