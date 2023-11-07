@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "foobar2000",
-    "version": "2.1.0-alpha.0",
+    "version": "2.1.0",
     "news": {
+      "2.1.0": {
+        "en": "Adapter requires nodejs16 or newer now.\nAdapter has been moved to iobroker-community-adapters organization.\nDependencies have been updated.",
+        "de": "Adapter benötigt jetzt nodejs16 oder neuer.\nAdapter wurde auf iobroker-community-Adapter Organisation verschoben.\nAbhängigkeiten wurden aktualisiert.",
+        "ru": "Адаптер требует nodejs16 или новее теперь.\nАдаптер переехал в организацию iobroker-community-adapters.\nОбновлены зависимости.",
+        "pt": "Adaptador requer nodejs16 ou mais recente agora.\nAdapter foi movido para iobroker-community-adapters organização.\nAs dependências foram atualizadas.",
+        "nl": "Adapter vereist nodejs16 of Newer nu.\nAdapter is verplaatst naar iobroker-community-papters organisatie.\nAfhankelijkheid is geüpdateerd.",
+        "fr": "Adaptateur nécessite nodejs16 ou plus récent maintenant.\nL'adaptateur a été déplacé à l'organisation iobroker-community-adapters.\nLes dépendances ont été mises à jour.",
+        "it": "Adattatore richiede nodejs16 o più nuovo ora.\nL'adattatore è stato trasferito all'organizzazione iobroker-community-adapters.\nLe dipendenze sono state aggiornate.",
+        "es": "Adaptador requiere nodejs16 o nuevo ahora.\nEl adaptador ha sido trasladado a la organización de ibroker-community-adapters.\nSe han actualizado las dependencias.",
+        "pl": "Adapter wymaga węzłów 16 lub nowszych.\nAdapter przeniesiono do organizacji iobroker-community-adapter.\nW zależności zostały zaktualizowane.",
+        "uk": "Адаптер вимагає nodejs16 або новіший зараз.\nПереміщено перехід на організацію iobroker-community-adapters.\nОновлено залежність.",
+        "zh-cn": "道歉要求现在不再出现。.\n现已移到加勒比妓院。.\n情况已经更新。."
+      },
       "2.1.0-alpha.0": {
         "en": "Adapter requires nodejs16 or newer now.\nAdapter has been moved to iobroker-community-adapters organization.\nDependencies have been updated.",
         "de": "Adapter benötigt jetzt nodejs16 oder neuer.\nAdapter wurde auf iobroker-community-Adapter Organisation verschoben.\nAbhängigkeiten wurden aktualisiert.",

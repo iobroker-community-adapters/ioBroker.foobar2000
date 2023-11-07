@@ -41,7 +41,7 @@ To display the cover as a link to a file, in the file ```c:\Users\{USER}\AppData
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.1.0 (2023-11-07)
 * (mcm1957) Adapter requires nodejs16 or newer now.
 * (mcm1957) Adapter has been moved to iobroker-community-adapters organization.
 * (mcm1957) Dependencies have been updated.
