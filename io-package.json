@@ -39,38 +39,65 @@
         "zh-cn": "Completely rewritten"
       }
     },
-    "title": "Control foobar2000 player",
-    "desc": {
-      "en": "Control your foobar2000 player",
-      "de": "Steuern Sie Ihren foobar2000-Player",
-      "ru": "Управляйте своим игроком foobar2000",
-      "pt": "Controle o seu foobar2000 player",
-      "nl": "Bedien uw foobar2000-speler",
-      "fr": "Contrôlez votre lecteur foobar2000",
-      "it": "Controlla il tuo giocatore foobar2000",
-      "es": "Controla tu reproductor foobar2000",
-      "pl": "Kontroluj swój odtwarzacz foobar2000",
-      "zh-cn": "控制您的foobar2000播放器"
+    "titleLang": {
+        "en": "Control foobar2000 player",
+        "de": "Steuerung foobar2000 Player",
+        "ru": "Управление foobar2000 игроком",
+        "pt": "Control foobar2000 jogador",
+        "nl": "Controle:",
+        "fr": "Contrôle du joueur de foobar2000",
+        "it": "Controllo del lettore foobar2000",
+        "es": "Control foobar2000 jugador",
+        "pl": "Foobar2000 player",
+        "uk": "Контроль фобар2000",
+        "zh-cn": "控制软禁2000年"
     },
-    "license": "MIT",
+    "desc": {
+        "en": "Control your foobar2000 player",
+        "de": "Steuern Sie Ihren foobar2000 Player",
+        "ru": "Контролируйте своего игрока foobar2000",
+        "pt": "Controle o seu jogador foobar2000",
+        "nl": "Controleer je foobar2000 speler",
+        "fr": "Contrôlez votre lecteur foobar2000",
+        "it": "Controlla il tuo lettore foobar2000",
+        "es": "Controle su jugador foobar2000",
+        "pl": "Kontrola nad foobar2000",
+        "uk": "Керуйте фобар2000",
+        "zh-cn": "控制你的野蛮2000年事件"
+    },
     "authors": [
-      "instalator"
+      "instalator",
+      "iobroker-community-adapters <mcm57@gmx.at>"
     ],
+    "keywords": [
+        "foobar2000",
+        "player"
+    ],
+    "license": "MIT",
     "platform": "Javascript/Node.js",
-    "mode": "daemon",
+    "main": "foobar2000.js",
     "icon": "foobar2000.png",
     "enabled": false,
-    "compact": true,
-    "materialize": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/iobroker.foobar2000/master/admin/foobar2000.png",
+    "readme": "https://github.com/iobroker-community-adapters/iobroker.foobar2000/blob/master/README.md",
     "loglevel": "info",
+    "mode": "daemon",
     "type": "multimedia",
-    "extIcon": "https://raw.githubusercontent.com/instalator/iobroker.foobar2000/master/admin/foobar2000.png",
-    "keywords": [
-      "foobar2000",
-      "player"
-    ],
-    "readme": "https://github.com/instalator/iobroker.foobar2000/blob/master/README.md"
-  },
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "pull",
+    "materialize": true,
+    "dependencies": [
+        {
+          "js-controller": ">=4.0.24"
+        }
+      ],
+      "globalDependencies": [
+        {
+          "admin": ">=5.1.13"
+        }
+      ]
+    },
   "native": {
     "ip": "127.0.0.1",
     "port": 8888,
