@@ -1,6 +1,6 @@
 {
   "name": "iobroker.foobar2000",
-  "version": "2.0.4",
+  "version": "2.1.0-alpha.0",
   "description": "ioBroker Foobar2000 player adapter",
   "author": {
     "name": "instalator",
@@ -12,8 +12,8 @@
       "email": "vvvalt@mail.ru"
     },
     {
-        "name": "iobroker-community-adapters",
-        "email": "mcm57@gmx.at"
+      "name": "iobroker-community-adapters",
+      "email": "mcm57@gmx.at"
     }
   ],
   "homepage": "https://github.com/iobroker-community-adapters/iobroker.foobar2000",

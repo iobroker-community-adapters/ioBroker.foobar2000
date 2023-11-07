@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "foobar2000",
-    "version": "2.0.4",
+    "version": "2.1.0-alpha.0",
     "news": {
+      "2.1.0-alpha.0": {
+        "en": "Adapter requires nodejs16 or newer now.\nAdapter has been moved to iobroker-community-adapters organization.\nDependencies have been updated.",
+        "de": "Adapter benötigt jetzt nodejs16 oder neuer.\nAdapter wurde auf iobroker-community-Adapter Organisation verschoben.\nAbhängigkeiten wurden aktualisiert.",
+        "ru": "Адаптер требует nodejs16 или новее теперь.\nАдаптер переехал в организацию iobroker-community-adapters.\nОбновлены зависимости.",
+        "pt": "Adaptador requer nodejs16 ou mais recente agora.\nAdapter foi movido para iobroker-community-adapters organização.\nAs dependências foram atualizadas.",
+        "nl": "Adapter vereist nodejs16 of Newer nu.\nAdapter is verplaatst naar iobroker-community-papters organisatie.\nAfhankelijkheid is geüpdateerd.",
+        "fr": "Adaptateur nécessite nodejs16 ou plus récent maintenant.\nL'adaptateur a été déplacé à l'organisation iobroker-community-adapters.\nLes dépendances ont été mises à jour.",
+        "it": "Adattatore richiede nodejs16 o più nuovo ora.\nL'adattatore è stato trasferito all'organizzazione iobroker-community-adapters.\nLe dipendenze sono state aggiornate.",
+        "es": "Adaptador requiere nodejs16 o nuevo ahora.\nEl adaptador ha sido trasladado a la organización de ibroker-community-adapters.\nSe han actualizado las dependencias.",
+        "pl": "Adapter wymaga węzłów 16 lub nowszych.\nAdapter przeniesiono do organizacji iobroker-community-adapter.\nW zależności zostały zaktualizowane.",
+        "uk": "Адаптер вимагає nodejs16 або новіший зараз.\nПереміщено перехід на організацію iobroker-community-adapters.\nОновлено залежність.",
+        "zh-cn": "道歉要求现在不再出现。.\n现已移到加勒比妓院。.\n情况已经更新。."
+      },
       "2.0.4": {
         "en": "fixed error",
         "de": "fixed error",
@@ -14,7 +27,8 @@
         "es": "fixed error",
         "pl": "fixed error",
         "zh-cn": "fixed error"
-      },"2.0.3": {
+      },
+      "2.0.3": {
         "en": "fixed admin error",
         "de": "fixed admin error",
         "ru": "fixed admin error",
@@ -40,38 +54,38 @@
       }
     },
     "titleLang": {
-        "en": "Control foobar2000 player",
-        "de": "Steuerung foobar2000 Player",
-        "ru": "Управление foobar2000 игроком",
-        "pt": "Control foobar2000 jogador",
-        "nl": "Controle:",
-        "fr": "Contrôle du joueur de foobar2000",
-        "it": "Controllo del lettore foobar2000",
-        "es": "Control foobar2000 jugador",
-        "pl": "Foobar2000 player",
-        "uk": "Контроль фобар2000",
-        "zh-cn": "控制软禁2000年"
+      "en": "Control foobar2000 player",
+      "de": "Steuerung foobar2000 Player",
+      "ru": "Управление foobar2000 игроком",
+      "pt": "Control foobar2000 jogador",
+      "nl": "Controle:",
+      "fr": "Contrôle du joueur de foobar2000",
+      "it": "Controllo del lettore foobar2000",
+      "es": "Control foobar2000 jugador",
+      "pl": "Foobar2000 player",
+      "uk": "Контроль фобар2000",
+      "zh-cn": "控制软禁2000年"
     },
     "desc": {
-        "en": "Control your foobar2000 player",
-        "de": "Steuern Sie Ihren foobar2000 Player",
-        "ru": "Контролируйте своего игрока foobar2000",
-        "pt": "Controle o seu jogador foobar2000",
-        "nl": "Controleer je foobar2000 speler",
-        "fr": "Contrôlez votre lecteur foobar2000",
-        "it": "Controlla il tuo lettore foobar2000",
-        "es": "Controle su jugador foobar2000",
-        "pl": "Kontrola nad foobar2000",
-        "uk": "Керуйте фобар2000",
-        "zh-cn": "控制你的野蛮2000年事件"
+      "en": "Control your foobar2000 player",
+      "de": "Steuern Sie Ihren foobar2000 Player",
+      "ru": "Контролируйте своего игрока foobar2000",
+      "pt": "Controle o seu jogador foobar2000",
+      "nl": "Controleer je foobar2000 speler",
+      "fr": "Contrôlez votre lecteur foobar2000",
+      "it": "Controlla il tuo lettore foobar2000",
+      "es": "Controle su jugador foobar2000",
+      "pl": "Kontrola nad foobar2000",
+      "uk": "Керуйте фобар2000",
+      "zh-cn": "控制你的野蛮2000年事件"
     },
     "authors": [
       "instalator",
       "iobroker-community-adapters <mcm57@gmx.at>"
     ],
     "keywords": [
-        "foobar2000",
-        "player"
+      "foobar2000",
+      "player"
     ],
     "license": "MIT",
     "platform": "Javascript/Node.js",
@@ -88,16 +102,16 @@
     "dataSource": "pull",
     "materialize": true,
     "dependencies": [
-        {
-          "js-controller": ">=4.0.24"
-        }
-      ],
-      "globalDependencies": [
-        {
-          "admin": ">=5.1.13"
-        }
-      ]
-    },
+      {
+        "js-controller": ">=4.0.24"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.1.13"
+      }
+    ]
+  },
   "native": {
     "ip": "127.0.0.1",
     "port": 8888,
@@ -430,7 +444,11 @@
         "read": true,
         "write": true,
         "def": false,
-        "states": {"0": "Off", "1": "All", "2": "One"}
+        "states": {
+          "0": "Off",
+          "1": "All",
+          "2": "One"
+        }
       },
       "native": {}
     },
