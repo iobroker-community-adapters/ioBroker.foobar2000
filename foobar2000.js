@@ -1,13 +1,19 @@
-"use strict";
+'use strict';
 const utils = require('@iobroker/adapter-core');
-let http = require('http');
-let exec = require('child_process').exec;
-let adapter, foobarPath = null, timerPoll, timeout, muteVol = 100, request, old_states,
-    states = {
-        playlist: []
-    };
+const http = require('http');
+const exec = require('child_process').exec;
+let adapter;
+let foobarPath = null;
+let timerPoll;
+let timeout;
+let muteVol = 100;
+let request;
+let old_states;
+const states = {
+    playlist: []
+};
 
-let Commands = {
+const Commands = {
     'play':            'Start',
     'stop':            'Stop',
     'next':            'StartNext',
@@ -40,7 +46,7 @@ function startAdapter(options){
             timerPoll && clearInterval(timerPoll);
             timeout && clearTimeout(timeout);
             try {
-                debug('cleaned everything up...');
+                adapter.log.debug('cleaned everything up...');
                 callback();
             } catch (e) {
                 callback();
@@ -50,7 +56,7 @@ function startAdapter(options){
             if (id && state && !state.ack){
                 adapter.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
                 let param;
-                id = id.split(".")[2].toString().toLowerCase();
+                id = id.split('.')[2].toString().toLowerCase();
                 if (id === 'start' || id === 'exit'){
                     launch(id);
                     return;
@@ -137,14 +143,14 @@ function startAdapter(options){
                             path: '/foobar2000controller/?cmd=Browse&param1=' + param + '&param2=EnqueueDirSubdirs' //&param3=browser.json
                         };*/
                         timeout && clearTimeout(timeout);
-                        httpGet('Browse', [param, 'EnqueueDirSubdirs'], (data) => {
+                        httpGet('Browse', [param, 'EnqueueDirSubdirs'], (_data) => {
                             timeout = setTimeout(() => {
                                 getPlaylist();
                             }, 1000);
                         });
                     }
                 } else {
-                    let cmd = Commands[id];
+                    const cmd = Commands[id];
                     if (cmd){
                         if (param !== undefined){
                             httpGet(cmd, [param]);
@@ -165,7 +171,7 @@ function httpGet(cmd, param, cb){
             params += '&param' + (i + 1) + '=' + key;
         });
     }
-    let options = {
+    const options = {
         host: adapter.config.ip || '127.0.0.1',
         port: adapter.config.port || 8888,
         path: '/foobar2000controller/?cmd=' + cmd + params
@@ -355,41 +361,41 @@ function setInfoConnection(val){
 function secToText(sec){
     let res;
     let m = Math.floor(sec / 60);
-    let s = sec % 60;
-    let h = Math.floor(m / 60);
+    const s = sec % 60;
+    const h = Math.floor(m / 60);
     m = m % 60;
     if (h > 0){
-        res = pad2(h) + ":" + pad2(m) + ":" + pad2(s);
+        res = pad2(h) + ':' + pad2(m) + ':' + pad2(s);
     } else {
-        res = pad2(m) + ":" + pad2(s);
+        res = pad2(m) + ':' + pad2(s);
     }
     return res;
 }
 
 function pad2(num){
-    let s = num.toString();
-    return (s.length < 2) ? "0" + s :s;
+    const s = num.toString();
+    return (s.length < 2) ? '0' + s :s;
 }
 
 function getPlaylist(){
     httpGet('PlaylistItemsPerPage', [16384], (res) => {
         if (res && res.playlist){
-            let playlist = [];
-            let arr = res.songs;
+            const playlist = [];
+            //const arr = res.songs;
             res.playlist.forEach((key, i) => {
                 playlist[i] = {
-                    "id":      i + 1,
-                    "artist":  key.artist,
-                    "album":   key.album,
-                    "bitrate": 0,
-                    "title":   key.track,
-                    "file":    "",
-                    "genre":   "",
-                    "year":    0,
-                    "len":     key.len,
-                    "rating":  key.rating,
-                    "cover":   ""
-                }
+                    'id':      i + 1,
+                    'artist':  key.artist,
+                    'album':   key.album,
+                    'bitrate': 0,
+                    'title':   key.track,
+                    'file':    '',
+                    'genre':   '',
+                    'year':    0,
+                    'len':     key.len,
+                    'rating':  key.rating,
+                    'cover':   ''
+                };
             });
             states.playlist = JSON.stringify(playlist);
             states.playlists = JSON.stringify(res.playlists);
@@ -406,8 +412,8 @@ function launch(cmd){
             sendShellCommand('exit');
         }
     } else if (adapter.config.cmdstart){
-        let parts = adapter.config.path.split(':');
-        let options = {
+        const parts = adapter.config.path.split(':');
+        const options = {
             host: parts[0],
             port: parts[1],
             path: ''
@@ -455,18 +461,18 @@ function browser(cmd, param){
 }
 
 function filemanager(val, arr){
-    let browser = {}, files = [];
+    const browser = {}, files = [];
     arr.forEach((item, i, arr) => {
-        let obj = {};
-        let size = parseFloat(arr[i].fs) * 1024;
+        const obj = {};
+        const size = parseFloat(arr[i].fs) * 1024;
         if (!isNaN(size)){
             obj.size = (parseFloat(arr[i].fs.replace(',', '.')) * 1024).toFixed(0);
         } else {
             obj.size = '';
         }
         if (arr[i].ft && ~arr[i].ft.indexOf(':')){
-            let mod = arr[i].ft.split(' '); //"27.05.2004 01:50"  2016-02-27 16:05:46
-            let d = mod[0].split('.').reverse().join('-');
+            const mod = arr[i].ft.split(' '); //"27.05.2004 01:50"  2016-02-27 16:05:46
+            const d = mod[0].split('.').reverse().join('-');
             arr[i].ft = d + ' ' + mod[1];
         }
         if (arr[i].fs){
