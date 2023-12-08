@@ -16,7 +16,7 @@
       "email": "mcm57@gmx.at"
     }
   ],
-  "homepage": "https://github.com/iobroker-community-adapters/iobroker.foobar2000",
+  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.foobar2000",
   "license": "MIT",
   "keywords": [
     "ioBroker",
@@ -26,7 +26,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/iobroker-community-adapters/iobroker.foobar2000.git"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.foobar2000.git"
   },
   "engines": {
     "node": ">=16"
@@ -73,7 +73,7 @@
     "release": "release-script"
   },
   "bugs": {
-    "url": "https://github.com/iobroker-community-adapters/iobroker.foobar2000/issues"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.foobar2000/issues"
   },
   "readmeFilename": "README.md"
 }
