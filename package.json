@@ -2,19 +2,10 @@
   "name": "iobroker.foobar2000",
   "version": "2.2.0",
   "description": "ioBroker Foobar2000 player adapter",
-  "author": {
-    "name": "instalator",
-    "email": "vvvalt@mail.ru"
-  },
+  "author": "instalator <vvvalt@mail.ru>",
   "contributors": [
-    {
-      "name": "instalator",
-      "email": "vvvalt@mail.ru"
-    },
-    {
-      "name": "iobroker-community-adapters",
-      "email": "mcm57@gmx.at"
-    }
+    "instalator <vvvalt@mail.ru>",
+    "iobroker-community-adapters <mcm57@gmx.at>"
   ],
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.foobar2000",
   "license": "MIT",
