@@ -52,7 +52,8 @@
         "it": "fixed error",
         "es": "fixed error",
         "pl": "fixed error",
-        "zh-cn": "fixed error"
+        "zh-cn": "fixed error",
+        "uk": "виправлена ​​помилка"
       },
       "2.0.3": {
         "en": "fixed admin error",
@@ -64,7 +65,8 @@
         "it": "fixed admin error",
         "es": "fixed admin error",
         "pl": "fixed admin error",
-        "zh-cn": "fixed admin error"
+        "zh-cn": "fixed admin error",
+        "uk": "виправлена ​​помилка адміністратора"
       },
       "2.0.0": {
         "en": "Completely rewritten",
@@ -76,7 +78,8 @@
         "it": "Completely rewritten",
         "es": "Completely rewritten",
         "pl": "Completely rewritten",
-        "zh-cn": "Completely rewritten"
+        "zh-cn": "Completely rewritten",
+        "uk": "Повністю переписано"
       }
     },
     "titleLang": {
