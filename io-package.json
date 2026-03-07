@@ -118,7 +118,6 @@
       "type": "free"
     },
     "platform": "Javascript/Node.js",
-    "main": "foobar2000.js",
     "icon": "foobar2000.png",
     "enabled": false,
     "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.foobar2000/master/admin/foobar2000.png",
