@@ -1,7 +1,7 @@
 'use strict';
 const utils = require('@iobroker/adapter-core');
-const http = require('http');
-const exec = require('child_process').exec;
+const http = require('node:http');
+const exec = require('node:child_process').exec;
 let adapter;
 let foobarPath = null;
 let timerPoll;
